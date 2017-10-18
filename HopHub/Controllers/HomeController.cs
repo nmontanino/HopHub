@@ -8,18 +8,25 @@ using HopHub.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using unirest_net.http;
+using Microsoft.Extensions.Configuration;
 
 namespace HopHub.Controllers
 {
     public class HomeController : Controller
     {
+        public IConfiguration Configuration { get; }
+
+        public HomeController(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
         public IActionResult Index()
         {
-            // TODO: Create config file for key to keep it private from source control
-            string key = "";
-
+            string key = Configuration["APIKey"];
             string query = "Golden+Monkey";
             string type = "beer";
+
             string testURL = $"https://api.brewerydb.com/v2/search?q={query}&type={type}&key={key}";
 
             HttpResponse<string> jsonResponse = Unirest.get(testURL)

@@ -7,15 +7,20 @@ namespace HopHub.Models
 {
     public class Beer
     {
-        // TODO: Create Beer model class
+        // TODO: Finish Beer model class
 
-        // int ID
-        // string name
-        // string brewery
-        // string description
-        // string style
-        // string style description
-        // double ABV
-        // double avg rating (1-5)
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double ABV { get; set; }
+
+        // Average user rating
+        public double AvgRating { get; set; }
+
+        public int StyleID { get; set; }
+        //public Style Style { get; set; }
+
+        public int BreweryID { get; set; }
+        //public Brewery Brewery { get; set; }
     }
 }

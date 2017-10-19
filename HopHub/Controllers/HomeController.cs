@@ -27,11 +27,12 @@ namespace HopHub.Controllers
             return View();
         }
 
+        // Queries API for list of beers and displays them to the home page.
         public object GetBeer(string beer)
         {
             string key = Configuration["APIKey"];
             string type = "beer";
-            string URL = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&key={key}";
+            string URL = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&withBreweries=Y&key={key}";
 
             HttpResponse<string> beerResults = Unirest.get(URL).asJson<string>();
 
@@ -43,28 +44,17 @@ namespace HopHub.Controllers
         public IActionResult Index(SearchBeerViewModel searchBeerVM)
         {
             //string query = searchBeerVM.Query;
-            //string key = Configuration["APIKey"];
-            //string type = "beer";
-
-            //string URL = $"https://api.brewerydb.com/v2/search?q={query}&type={type}&key={key}";
-
-            //HttpResponse<string> beerResults = Unirest.get(URL)
-            //    .asJson<string>();
-
-            //var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
             return View();
         }
 
         public IActionResult Search()
         {
-            // TODO: Set up search bar that takes in query parameter
             return View();
         }
 
         [HttpPost]
         public IActionResult Search(string query)
         {
-            // TODO: Search should return list of beers 
             return View();
         }
 

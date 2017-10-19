@@ -9,18 +9,40 @@ function getBeers(query) {
             $('.results').empty();
 
             let beers = response.data
-            let i = 0
-            for (i; i < 20; i++) {
-                $('.results').append(`<b>${beers[i].name}</b>`);
+            // TODO: Paginate results to display 10 results per page. 50 results max.
+            if (typeof(beers) != 'undefined') {
+                $('.results').append(`<i>Displaying ${beers.length} results.</i><br>`);
                 $('.results').append("<br>");
-                $('.results').append(`${beers[i].style.name}`);
+            } else {
+                $('.results').append("<i>No search results.</i>"); 
+            }
+
+            let i = 0;
+            for (i; i < beers.length; i++) {
+
+                let name = beers[i].name;
+                let styleName = beers[i].style.name;
+                let ABV = beers[i].abv;
+                let description = beers[i].description;
+                let styleDesc = beers[i].style.description;
+
+                $('.results').append(`<b>${name}</b><br>`);
+                $('.results').append(`${styleName}<br>`);
+                $('.results').append(`<a href="${beers[i].breweries[0].website}">${beers[i].breweries[0].name}</a><br>`)
+
+                if (typeof (ABV) !== 'undefined') {
+                    $('.results').append(`ABV: ${ABV}%<br>`);
+                }
+
                 $('.results').append("<br>");
-                $('.results').append(`ABV: ${beers[i].abv}%`);
+
+                if (typeof (description) !== 'undefined') {
+                    $('.results').append(`${description}<br>`);
+                    $('.results').append("<br>");
+                }
+
+                $('.results').append(`Style Description: ${styleDesc}<br>`);
                 $('.results').append("<br><br>");
-                $('.results').append(`${beers[i].description}`);
-                $('.results').append("<br><br>");
-                $('.results').append(`Style Description: ${beers[i].style.description}`);
-                $('.results').append("<br><br><br>");
             }
         }
     });

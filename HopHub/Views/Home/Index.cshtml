@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "HopHub";
 }
-<br />
+@*<br />
 <br />
 <form asp-controller="Home" asp-action="Search" method="post">
     <div class="row">
@@ -16,4 +16,12 @@
         </div>
     </div>
 </form>
+<br />*@
+
 <br />
+<input type="text" name="beer" class="beer" placeholder="Beer name" />
+<button class="submit_beer">Search</button>
+<br />
+<br />
+
+<div class="results"></div>

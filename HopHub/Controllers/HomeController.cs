@@ -14,7 +14,7 @@ namespace HopHub.Controllers
 {
     public class HomeController : Controller
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         public HomeController(IConfiguration config)
         {
@@ -23,18 +23,35 @@ namespace HopHub.Controllers
 
         public IActionResult Index()
         {
+            //SearchBeerViewModel searchBeerVM = new SearchBeerViewModel();
+            return View();
+        }
+
+        public object GetBeer(string beer)
+        {
             string key = Configuration["APIKey"];
-            string query = "Golden+Monkey";
             string type = "beer";
+            string URL = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&key={key}";
 
-            string testURL = $"https://api.brewerydb.com/v2/search?q={query}&type={type}&key={key}";
+            HttpResponse<string> beerResults = Unirest.get(URL).asJson<string>();
 
-            HttpResponse<string> jsonResponse = Unirest.get(testURL)
-                .asJson<string>();
+            var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
+            return results;
+        }
 
-            var json = JsonConvert.DeserializeObject<object>(jsonResponse.Body);
-            ViewBag.json = json;
+        [HttpPost]
+        public IActionResult Index(SearchBeerViewModel searchBeerVM)
+        {
+            //string query = searchBeerVM.Query;
+            //string key = Configuration["APIKey"];
+            //string type = "beer";
 
+            //string URL = $"https://api.brewerydb.com/v2/search?q={query}&type={type}&key={key}";
+
+            //HttpResponse<string> beerResults = Unirest.get(URL)
+            //    .asJson<string>();
+
+            //var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
             return View();
         }
 
@@ -55,5 +72,6 @@ namespace HopHub.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

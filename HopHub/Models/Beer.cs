@@ -14,13 +14,16 @@ namespace HopHub.Models
         public string Description { get; set; }
         public double ABV { get; set; }
 
-        // Average user rating
+        public string LogoLargeURL { get; set; }
+        public string LogoMedURL { get; set; }
+
+        // Average user rating (1-5)
         public double AvgRating { get; set; }
 
         public int StyleID { get; set; }
-        //public Style Style { get; set; }
+        public Style Style { get; set; }
 
         public int BreweryID { get; set; }
-        //public Brewery Brewery { get; set; }
+        public Brewery Brewery { get; set; }
     }
 }

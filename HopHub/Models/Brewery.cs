@@ -11,5 +11,7 @@ namespace HopHub.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Website { get; set; }
+
+        // Possibly add image URL, and location information (address, latitude, longitude), hours of operation, is open.
     }
 }

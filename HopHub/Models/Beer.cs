@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HopHub.Models
 {
     public class Beer
-    {
-        // TODO: Finish Beer model class
+    {   
+        // TODO: Update Beer model to reference ID from API response
 
         public int ID { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public double ABV { get; set; }

@@ -20,19 +20,30 @@ namespace HopHub.Controllers
             Configuration = config;
         }
 
+        public object SingleBeer(string id)
+        {
+            string key = Configuration["APIKey"];
+            string uri = $"https://api.brewerydb.com/v2/beer/{id}?withBreweries=Y&key={key}";
+
+            HttpResponse<string> singleBeer = Unirest.get(uri).asJson<string>();
+
+            object result = JsonConvert.DeserializeObject<object>(singleBeer.Body);
+            return result;
+        }
+
         // GET: /Beer/
         public IActionResult Index(string id)
         {
             // Get Single beer by ID and display information.
             string key = Configuration["APIKey"];
-            string URL = $"https://api.brewerydb.com/v2/beer/{id}?withBreweries=Y&key={key}";
+            string uri = $"https://api.brewerydb.com/v2/beer/{id}?withBreweries=Y&key={key}";
 
-            HttpResponse<string> singleBeer = Unirest.get(URL).asJson<string>();
+            HttpResponse<string> singleBeer = Unirest.get(uri).asJson<string>();
 
-            // Create viewmodel with paramaters passed in?
+            ViewBag.json = JsonConvert.DeserializeObject<object>(singleBeer.Body);  
 
-            ViewBag.json = JsonConvert.DeserializeObject<object>(singleBeer.Body);
             return View();
         }
     }
 }
+

@@ -9,6 +9,9 @@ namespace HopHub.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        // TODO: Add user age for age verification
+        // Must be over 21 years old to sign up for app because legal reasons
+        public int UserAge { get; set; }
+
+        IList<Entry> Entries { get; set; }
     }
 }

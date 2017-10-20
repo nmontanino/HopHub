@@ -10,6 +10,9 @@ namespace HopHub.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        // TODO: Add all the model tables to dbSet once finished with the rework
+        // public DbSet<Beer> Beers { get; set };
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

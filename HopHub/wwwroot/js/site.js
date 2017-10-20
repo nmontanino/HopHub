@@ -1,16 +1,17 @@
-﻿// Write your JavaScript code.
-'use strict';
+﻿'use strict';
 
 function getBeers(query) {
     $.ajax({
         url: "/home/getbeer?beer=" + query,
         success: function (response) {
             console.log(response);
-            $('.results').empty();
 
-            let beers = response.data
             // TODO: Paginate results to display 10 results per page. 50 results max.
-            if (typeof(beers) != 'undefined') {
+
+            $('.results').empty();
+            let beers = response.data;
+
+            if (typeof beers !== 'undefined') {
                 $('.results').append(`<i>Displaying ${beers.length} results.</i><br>`);
                 $('.results').append("<br>");
             } else {
@@ -29,15 +30,15 @@ function getBeers(query) {
 
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
                 $('.results').append(`${styleName}<br>`);
-                $('.results').append(`<a href="${beers[i].breweries[0].website}">${beers[i].breweries[0].name}</a><br>`)
+                $('.results').append(`<a href="${beers[i].breweries[0].website}">${beers[i].breweries[0].name}</a><br>`);
 
-                if (typeof (ABV) !== 'undefined') {
+                if (typeof ABV !== 'undefined') {
                     $('.results').append(`ABV: ${ABV}%<br>`);
                 }
 
                 $('.results').append("<br>");
 
-                if (typeof (description) !== 'undefined') {
+                if (typeof description !== 'undefined') {
                     $('.results').append(`${description}<br>`);
                     $('.results').append("<br>");
                 }

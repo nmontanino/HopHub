@@ -21,39 +21,18 @@ namespace HopHub.Controllers
             Configuration = config;
         }
 
-        public IActionResult Index()
-        {
-            //SearchBeerViewModel searchBeerVM = new SearchBeerViewModel();
-            return View();
-        }
-
-        // Queries API for list of beers and displays them to the home page.
         public object GetBeer(string beer)
         {
             string key = Configuration["APIKey"];
-            string type = "beer";
-            string URL = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&withBreweries=Y&key={key}";
+            string uri = $"https://api.brewerydb.com/v2/search?q={beer}&type=beer&withBreweries=Y&key={key}";
 
-            HttpResponse<string> beerResults = Unirest.get(URL).asJson<string>();
+            HttpResponse<string> beerResults = Unirest.get(uri).asJson<string>();
 
             var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
             return results;
         }
 
-        [HttpPost]
-        public IActionResult Index(SearchBeerViewModel searchBeerVM)
-        {
-            //string query = searchBeerVM.Query;
-            return View();
-        }
-
-        public IActionResult Search()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Search(string query)
+        public IActionResult Index()
         {
             return View();
         }

@@ -9,7 +9,8 @@ namespace HopHub.Models
     {
         public int ID { get; set; }
 
-        public int ApplicationUserID { get; set; } // TODO: Change ID to string in User table
+        // NOTE: ID for ApplicationUser uses string for primary key
+        public string ApplicationUserID { get; set; } 
         public ApplicationUser ApplicationUser { get; set; }
 
         public int BeerID { get; set; }
@@ -17,11 +18,10 @@ namespace HopHub.Models
 
         public int Rating { get; set; }
         public string Review { get; set; }
-
         public string UserComments { get; set; }
         public string Location { get; set; }
 
         // TODO: Datetime to be set at creation of each entry.
-        public DateTime EntryDateTime { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

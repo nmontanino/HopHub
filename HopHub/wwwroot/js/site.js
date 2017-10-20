@@ -25,8 +25,9 @@ function getBeers(query) {
                 let ABV = beers[i].abv;
                 let description = beers[i].description;
                 let styleDesc = beers[i].style.description;
+                let beerId = beers[i].id;
 
-                $('.results').append(`<b>${name}</b><br>`);
+                $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
                 $('.results').append(`${styleName}<br>`);
                 $('.results').append(`<a href="${beers[i].breweries[0].website}">${beers[i].breweries[0].name}</a><br>`)
 

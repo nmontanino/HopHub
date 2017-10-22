@@ -21,7 +21,6 @@ namespace HopHub.Models
         public string UserComments { get; set; }
         public string Location { get; set; }
 
-        // TODO: Datetime to be set at creation of each entry.
         public DateTime TimeStamp { get; set; }
     }
 }

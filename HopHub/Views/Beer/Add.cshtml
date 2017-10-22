@@ -1,6 +1,23 @@
-﻿
+﻿@model AddEntryViewModel
+
 <form asp-controller="Beer" asp-action="Add" method="post">
-
-@*TODO: Create page to add Beer to User entries if user is logged in*@    
-
+    <div class="form-group">
+        <label asp-for="Rating"></label>
+        <input class="form-control" asp-for="Rating" />
+        <span asp-validation-for="Rating"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Review"></label>
+        <textarea class="form-control" asp-for="Review" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserComments"></label>
+        <textarea class="form-control" asp-for="UserComments" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input class="form-control" asp-for="Location" />
+    </div>
+    <input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
+    <input class="btn btn-default" type="submit" value="Add Entry" />
 </form>

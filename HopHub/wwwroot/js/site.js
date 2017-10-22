@@ -30,7 +30,7 @@ function getBeers(query) {
 
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
                 $('.results').append(`${styleName}<br>`);
-                $('.results').append(`<a href="${beers[i].breweries[0].website}">${beers[i].breweries[0].name}</a><br>`);
+                $('.results').append(`${beers[i].breweries[0].name}<br>`);
 
                 if (typeof abv !== 'undefined') {
                     $('.results').append(`ABV: ${abv}%<br>`);
@@ -88,10 +88,10 @@ function singleBeer(beerId) {
             if (typeof breweryDesc !== 'undefined') {
                 $('.info').append(`<p><b>Brewery Description</b></p>`);
                 $('.info').append(`<p>${breweryDesc}</p>`);
-                $('.info').append(`<p><a href="${website}">Website</a></p>`);
             }
+            $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             $('.info').append(`<br>`);
-            $('.info').append(`<h4><a href="/Beer/Add?id=${beer.id}">Add ${beer.name} to your log.</a></h4>`);
+            $('.info').append(`<h4><a href="/Beer/Add?id=${beer.id}">Add ${beer.name} to your log!</a></h4>`);
 
         }
     });

@@ -62,11 +62,12 @@ function singleBeer(beerId) {
             let description = beer.description;
             let website = beer.breweries[0].website
             let breweryDesc = beer.breweries[0].description
-            //let image = beer.labels.medium;
 
-            //if (typeof image !== 'undefined') {
-            //    $('.info').append(`<img src="${image}">`);
-            //}
+            let image = beer.labels;
+
+            if (typeof image !== 'undefined') {
+                $('.info').append(`<img src="${image.medium}">`);
+            }
 
             $('.info').append(`<h3>${beer.name}</h3>`);
             $('.info').append(`<h4>${beer.style.name}</h4>`);
@@ -89,16 +90,19 @@ function singleBeer(beerId) {
                 $('.info').append(`<p>${breweryDesc}</p>`);
                 $('.info').append(`<p><a href="${website}">Website</a></p>`);
             }
+            $('.info').append(`<br>`);
+            $('.info').append(`<h4><a href="/Beer/Add?id=${beer.id}">Add ${beer.name} to your log.</a></h4>`);
+
         }
     });
 }
 
 $(document).ready(function () {
 
-    $('.submit_beer').click(function () {
-        let beer = $('input.beer').val();
-        getBeers(beer);
-    });
+    //$('.submit_beer').click(function () {
+    //    let beer = $('input.beer').val();
+    //    getBeers(beer);
+    //});
 
     $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -109,8 +113,13 @@ $(document).ready(function () {
             return decodeURI(results[1]) || 0;
         }
     }
+    if ($('.results').length) {
+        getBeers($.urlParam('beer'));
+    }
 
     if ($('.info').length) {
         singleBeer($.urlParam('id'));
     }
+
+    
 });

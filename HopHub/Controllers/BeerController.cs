@@ -38,9 +38,14 @@ namespace HopHub.Controllers
             // Displays information of a single beer
             return View();
         }
-        public IActionResult Add()
+        public IActionResult Add(string id)
         {
-            return View();
+            // If user is logged in display form to add a beer to their log.
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return Redirect("/Account/Login");
         }
     }
 }

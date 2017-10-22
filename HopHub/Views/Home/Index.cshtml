@@ -1,27 +1,25 @@
-﻿@model SearchBeerViewModel
-@{
+﻿@{
     ViewData["Title"] = "HopHub";
 }
-@*<br />
 <br />
-<form asp-controller="Home" asp-action="Search" method="post">
+<br />
+<br />
+ <form asp-controller="Home" asp-action="Search" method="get">
     <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
+        <div class="col-md-4 col-md-offset-4">
             <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search for..." asp-for="Query" >
-                <span class="input-group-btn" asp-validation-for="Query">
-                    <button class="btn btn-primary" type="button">Search</button>
+                <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default submit_beer" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
                 </span>
             </div>
         </div>
     </div>
 </form>
-<br />*@
-
-<br />
-<input type="text" name="beer" class="beer" placeholder="Beer name" />
-<button class="submit_beer">Search</button>
 <br />
 <br />
 
-<div class="results"></div>
+
+

@@ -34,11 +34,13 @@ namespace HopHub.Controllers
 
         public IActionResult Index()
         {
+            // Display search bar
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Search()
         {
+            // Display search results
             return View();
         }
 

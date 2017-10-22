@@ -12,6 +12,6 @@ namespace HopHub.Models
         // Must be at least 21 years old to sign up for app because legal reasons
         //public bool Age { get; set; }
 
-        IList<Entry> Entries { get; set; }
+        public IList<Entry> Entries { get; set; }
     }
 }

@@ -5,16 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HopHub.Data;
 using HopHub.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HopHub.Controllers
 {
     public class EntryController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private ApplicationDbContext context;
 
-        public EntryController(ApplicationDbContext dbContext)
+        public EntryController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             context = dbContext;
+            _userManager = userManager;
         }
 
         // GET: /Entry/
@@ -24,7 +28,13 @@ namespace HopHub.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                // Get all entries associated with the current user
+                IList<Entry> entries = context
+                    .Entries
+                    .Where(e => e.ApplicationUserID == _userManager.GetUserId(HttpContext.User))
+                    .ToList();
+
+                return View(entries);
             }
             return Redirect("/Account/Login");
         }
@@ -46,20 +56,10 @@ namespace HopHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Beer newBeer = new Beer
-                //{
-                //    ReferenceID = addEntryVM.BeerID,
-                //    AvgRating = addEntryVM.Rating,
-
-                //};
-
                 Entry userEntry = new Entry
                 {
-                    // TODO: Double check username to userID
-                    ApplicationUserID = User.Identity.Name,
-                    
-                    // String BeerID
-                    BeerID = addEntryVM.BeerID,
+                    ApplicationUserID = _userManager.GetUserId(HttpContext.User),
+                    BeerID = addEntryVM.BeerID,  // String BeerID
                     Rating = addEntryVM.Rating,
                     Review = addEntryVM.Review,
                     UserComments = addEntryVM.UserComments,
@@ -75,7 +75,7 @@ namespace HopHub.Controllers
                 return Redirect("/Entry");
             }
 
-            // Make sure that the Beer ID property stays with the view model.
+            // TODO: Make sure that the Beer ID property stays with the view model.
             return View(addEntryVM);
         }
     }

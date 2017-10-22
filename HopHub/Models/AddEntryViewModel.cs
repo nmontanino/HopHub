@@ -8,7 +8,7 @@ namespace HopHub.Models
 {
     public class AddEntryViewModel
     {   
-        [Required]
+
         public string BeerID { get; set; }
 
         [Required]

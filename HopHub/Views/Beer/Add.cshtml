@@ -1,5 +1,6 @@
 ﻿@model AddEntryViewModel
-
+<br />
+<br />
 <form asp-controller="Beer" asp-action="Add" method="post">
     <div class="form-group">
         <label asp-for="Rating"></label>
@@ -8,11 +9,11 @@
     </div>
     <div class="form-group">
         <label asp-for="Review"></label>
-        <textarea class="form-control" asp-for="Review" />
+        <textarea class="form-control" asp-for="Review" >@Model.Review</textarea>
     </div>
     <div class="form-group">
         <label asp-for="UserComments"></label>
-        <textarea class="form-control" asp-for="UserComments" />
+        <textarea class="form-control" asp-for="UserComments">@Model.UserComments</textarea>
     </div>
     <div class="form-group">
         <label asp-for="Location"></label>

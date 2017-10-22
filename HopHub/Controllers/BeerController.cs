@@ -43,9 +43,39 @@ namespace HopHub.Controllers
             // If user is logged in display form to add a beer to their log.
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                AddEntryViewModel addEntryVM = new AddEntryViewModel();
+                addEntryVM.BeerID = id;
+
+                return View(addEntryVM);
             }
             return Redirect("/Account/Login");
+        }
+        [HttpPost]
+        public IActionResult Add(AddEntryViewModel addEntryVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Entry userEntry = new Entry
+                {
+                    // Double check username to userID
+                    ApplicationUserID = User.Identity.Name,
+
+                    BeerID = addEntryVM.BeerID,
+                    Rating = addEntryVM.Rating,
+                    Review = addEntryVM.Review,
+                    UserComments = addEntryVM.UserComments,
+                    Location = addEntryVM.Location,
+                    TimeStamp = DateTime.Now
+                };
+
+                // TODO: Store new user Entry to the database
+
+                // Ridirect to user log page.
+                return Redirect("/Entry");
+            }
+
+            // Make sure that the Beer ID property stays with the view model.
+            return View(addEntryVM);
         }
     }
 }

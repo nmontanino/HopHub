@@ -13,7 +13,7 @@ namespace HopHub.Models
         public string ApplicationUserID { get; set; } 
         public ApplicationUser ApplicationUser { get; set; }
 
-        public int BeerID { get; set; }
+        public string BeerID { get; set; }
         public Beer Beer { get; set; }
 
         public int Rating { get; set; }

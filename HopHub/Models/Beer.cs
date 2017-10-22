@@ -8,16 +8,10 @@ namespace HopHub.Models
 {
     public class Beer
     {   
-        // TODO: Update Beer model to reference ID from API response
-
         public int ID { get; set; }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double ABV { get; set; }
-
-        public string LogoLargeURL { get; set; }
-        public string LogoMedURL { get; set; }
+        // ID of beer from BreweryDB API
+        public string ReferenceID { get; set; }
 
         // Average user rating (1-5)
         public double AvgRating { get; set; }

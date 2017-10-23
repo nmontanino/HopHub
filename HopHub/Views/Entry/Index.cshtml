@@ -4,10 +4,29 @@
 
 @if (Model.Count == 0)
 {
-    <h3>There are no beers in your log yet.</h3>
+    <h4>There are no beers in your log yet.</h4>
 }
-
-@foreach (var entry in Model)
+else
 {
-    <p>@entry.BeerID</p>
+
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Rating</th>
+            <th>Comments</th>
+            <th>Location</th>
+            <th>Timestamp</th>
+        </tr>
+
+    @foreach (var entry in Model)
+    {
+        <tr>
+            <td>@entry.BeerID</td>
+            <td>@entry.Rating</td>
+            <td>@entry.UserComments</td>
+            <td>@entry.Location</td>
+            <td>@entry.TimeStamp</td>
+        </tr>
+    }
+    </table>
 }

@@ -28,6 +28,18 @@ function getBeers(query) {
                 let styleDesc = beers[i].style.description;
                 let beerId = beers[i].id;
 
+                //if (typeof abv !== 'undefined') { avb = null }
+                //if (typeof description !== 'undefined') { description = null }
+                
+                //$('.results').wrapinner(`<div class="list-group"><a href="/Beer?id=${beerId}" class="list-group-item">
+                //    <h4 class="list-group-item-heading">${name}</h4>
+                //    <h4 class="list-group-item-heading">${styleName}</h4>
+                //    <h4 class="list-group-item-heading">${beers[i].breweries[0].name}</h4>
+                //    <h4 class="list-group-item-heading">ABV: ${abv}%</h4>
+                //    <p class="list-group-item-text">${description}</p>
+                //    <p class="list-group-item-text">Style Description: ${styleDesc}</p></a></div>`);
+
+
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
                 $('.results').append(`${styleName}<br>`);
                 $('.results').append(`${beers[i].breweries[0].name}<br>`);
@@ -44,7 +56,7 @@ function getBeers(query) {
                 }
 
                 $('.results').append(`Style Description: ${styleDesc}<br>`);
-                $('.results').append("<br><br>");
+                $('.results').append("<hr>");
             }
         }
     });
@@ -92,17 +104,11 @@ function singleBeer(beerId) {
             $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             $('.info').append(`<br>`);
             $('.info').append(`<h4><a href="/Entry/Add?id=${beer.id}">Add ${beer.name} to your log!</a></h4>`);
-
         }
     });
 }
 
 $(document).ready(function () {
-
-    //$('.submit_beer').click(function () {
-    //    let beer = $('input.beer').val();
-    //    getBeers(beer);
-    //});
 
     $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -116,10 +122,7 @@ $(document).ready(function () {
     if ($('.results').length) {
         getBeers($.urlParam('beer'));
     }
-
     if ($('.info').length) {
         singleBeer($.urlParam('id'));
     }
-
-    
 });

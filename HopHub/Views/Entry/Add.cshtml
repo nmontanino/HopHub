@@ -1,24 +1,37 @@
 ﻿@model AddEntryViewModel
+
 <br />
 <br />
-<form asp-controller="Entry" asp-action="Add" method="post">
-    <div class="form-group">
-        <label asp-for="Rating"></label>
-        <input class="form-control" asp-for="Rating" />
-        <span asp-validation-for="Rating"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Review"></label>
-        <textarea class="form-control" asp-for="Review" >@Model.Review</textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="UserComments"></label>
-        <textarea class="form-control" asp-for="UserComments">@Model.UserComments</textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="Location"></label>
-        <input class="form-control" asp-for="Location" />
-    </div>
-    <input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
-    <input class="btn btn-default" type="submit" value="Add Entry" />
-</form>
+@*<h3 class="page-header">Add Entry</h3>*@
+<div class="well">
+    <h3>Add Entry</h3>
+    <br />
+    <form asp-controller="Entry" asp-action="Add" method="post">
+        <div class="form-group">
+            <label asp-for="Rating"></label>
+            <select class="form-control" asp-for="Rating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            @*<input class="form-control" asp-for="Rating" />*@
+            <span asp-validation-for="Rating"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Review"></label>
+            <textarea class="form-control" asp-for="Review">@Model.Review</textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserComments"></label>
+            <textarea class="form-control" asp-for="UserComments">@Model.UserComments</textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location"></label>
+            <input class="form-control" asp-for="Location" />
+        </div>
+        <input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
+</div>

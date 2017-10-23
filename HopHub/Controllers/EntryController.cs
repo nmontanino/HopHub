@@ -24,8 +24,6 @@ namespace HopHub.Controllers
         // GET: /Entry/
         public IActionResult Index()
         {
-            // TODO: Display list of user entries with rating and comments
-
             if (User.Identity.IsAuthenticated)
             {
                 // Get all entries associated with the current user
@@ -39,6 +37,7 @@ namespace HopHub.Controllers
             return Redirect("/Account/Login");
         }
 
+        // GET: /Entry/Add/
         public IActionResult Add(string id)
         {
             // If user is logged in display form to add a beer to their log.
@@ -51,6 +50,8 @@ namespace HopHub.Controllers
             }
             return Redirect("/Account/Login");
         }
+
+        // POST: /Entry/Add/
         [HttpPost]
         public IActionResult Add(AddEntryViewModel addEntryVM)
         {
@@ -74,8 +75,6 @@ namespace HopHub.Controllers
                 // Ridirect to user log page.
                 return Redirect("/Entry");
             }
-
-            // TODO: Make sure that the Beer ID property stays with the view model.
             return View(addEntryVM);
         }
     }

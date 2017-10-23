@@ -31,7 +31,7 @@ function getBeers(query) {
                 //if (typeof abv !== 'undefined') { avb = null }
                 //if (typeof description !== 'undefined') { description = null }
                 
-                //$('.results').wrapinner(`<div class="list-group"><a href="/Beer?id=${beerId}" class="list-group-item">
+                //$('.results').html(`<div class="list-group"><a href="/Beer?id=${beerId}" class="list-group-item">
                 //    <h4 class="list-group-item-heading">${name}</h4>
                 //    <h4 class="list-group-item-heading">${styleName}</h4>
                 //    <h4 class="list-group-item-heading">${beers[i].breweries[0].name}</h4>
@@ -103,7 +103,7 @@ function singleBeer(beerId) {
             }
             $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             $('.info').append(`<br>`);
-            $('.info').append(`<a href="/Entry/Add?id=${beer.id}" role="button" class="btn btn-success">Add ${beer.name} to your log!</a></h4>`);
+            $('.info').append(`<a href="/Entry/Add?id=${beer.id}" role="button" class="btn btn-primary">Add ${beer.name} to your log!</a>`);
         }
     });
 }

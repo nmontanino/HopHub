@@ -1,6 +1,16 @@
-﻿<br />
+﻿@model Beer
+
+<br />
 <div class="panel panel-default">
     <div class="panel-body">
+        @if (Model.AvgRating > 0)
+        {
+            <h4>Average user rating: @Model.AvgRating</h4>
+        }
+        else
+        {
+            <h4>Average user rating: <i>Not yet rated.</i></h4>
+        }
         <div class="info"></div>
     </div>
 </div>

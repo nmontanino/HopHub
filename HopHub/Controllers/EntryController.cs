@@ -31,10 +31,11 @@ namespace HopHub.Controllers
 
                 IList<Entry> entries = context
                     .Entries
+                    .Include(item => item.Beer)
                     .Where(e => e.ApplicationUserID == userID)
                     .ToList();
 
-                return View(entries);
+                return View(entries.Reverse());
             }
             return Redirect("/Account/Login");
         }
@@ -79,7 +80,7 @@ namespace HopHub.Controllers
                 // Get beer object by reference ID
                 Beer existingBeer = context.Beers.Single(b => b.ReferenceID == addEntryVM.BeerID);
                 
-                // Create Entry
+                // Create new Entry
                 Entry userEntry = new Entry
                 {
                     ApplicationUserID = _userManager.GetUserId(HttpContext.User),
@@ -95,9 +96,10 @@ namespace HopHub.Controllers
                 context.Entries.Add(userEntry);
                 context.SaveChanges();
 
-                // Update beers average rating
-                existingBeer.AvgRating = context
+                // Calculates the average rating for the beer and updates Beers table
+                existingBeer.AvgRating = (double)context
                     .Entries
+                    .Where(e => e.BeerID == existingBeer.ID)
                     .Sum(e => e.Rating) / context
                     .Entries
                     .Where(e => e.BeerID == existingBeer.ID)

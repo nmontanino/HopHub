@@ -72,8 +72,8 @@ function singleBeer(beerId) {
             let beer = response.data;
             let abv = beer.abv;
             let description = beer.description;
-            let website = beer.breweries[0].website
-            let breweryDesc = beer.breweries[0].description
+            let website = beer.breweries[0].website;
+            let breweryDesc = beer.breweries[0].description;
 
             let image = beer.labels;
 
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
     $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-        if (results == null) {
+        if (results === null) {
             return null;
         }
         else {

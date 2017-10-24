@@ -9,18 +9,20 @@ using Microsoft.AspNetCore.Http;
 using unirest_net.http;
 using Microsoft.Extensions.Configuration;
 using HopHub.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HopHub.Controllers
 {
     public class BeerController : Controller
     {
-        public IConfiguration Configuration { get; set; }
         private ApplicationDbContext context;
 
-        public BeerController(IConfiguration config, ApplicationDbContext dbContext)
+        public IConfiguration Configuration { get; set; }
+
+        public BeerController(ApplicationDbContext dbContext, IConfiguration config)
         {
-            Configuration = config,
-            context = dbContext
+            context = dbContext;
+            Configuration = config;
         }
 
         // Get beer by ID
@@ -36,11 +38,26 @@ namespace HopHub.Controllers
         }
 
         // GET: /Beer/
-        public IActionResult Index()
+        // Displays information of a single beer
+        public IActionResult Index(string id)
         {
-            // Displays information of a single beer (add to DB if not there already)
-            
-            return View();
+            bool beerExists = context.Beers.Any(b => b.ReferenceID == id);
+            //bool entryExists = context.Entries.Any(e => e.Beer.ReferenceID == id);
+
+            if (beerExists)
+            {
+                Beer existingBeer = context
+                    .Beers
+                    .Single(b => b.ReferenceID == id);
+
+                //IList<Entry> entries = context
+                //    .Entries
+                //    .Where(e => e.Beer.ReferenceID == id)
+                //    .ToList();
+
+                return View(existingBeer);
+            }
+            return View(new Beer());
         }
     }
 }

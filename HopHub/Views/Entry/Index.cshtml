@@ -11,8 +11,9 @@ else
 
     <table class="table table-hover">
         <tr>
-            <th>ID</th>
+            <th>Name</th>
             <th>Rating</th>
+            <th>Average Rating</th>
             <th>Comments</th>
             <th>Location</th>
             <th>Timestamp</th>
@@ -21,8 +22,9 @@ else
     @foreach (var entry in Model)
     {
         <tr>
-            <td>@entry.BeerID</td>
+            <td>@entry.Beer.Name</td>
             <td>@entry.Rating</td>
+            <td>@entry.Beer.AvgRating</td>
             <td>@entry.UserComments</td>
             <td>@entry.Location</td>
             <td>@entry.TimeStamp</td>

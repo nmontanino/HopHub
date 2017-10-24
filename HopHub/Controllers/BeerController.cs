@@ -15,10 +15,12 @@ namespace HopHub.Controllers
     public class BeerController : Controller
     {
         public IConfiguration Configuration { get; set; }
+        private ApplicationDbContext context;
 
-        public BeerController(IConfiguration config)
+        public BeerController(IConfiguration config, ApplicationDbContext dbContext)
         {
-            Configuration = config;
+            Configuration = config,
+            context = dbContext
         }
 
         // Get beer by ID
@@ -36,7 +38,8 @@ namespace HopHub.Controllers
         // GET: /Beer/
         public IActionResult Index()
         {
-            // Displays information of a single beer
+            // Displays information of a single beer (add to DB if not there already)
+            
             return View();
         }
     }

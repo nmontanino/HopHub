@@ -13,11 +13,8 @@ namespace HopHub.Models
         public string ApplicationUserID { get; set; } 
         public ApplicationUser ApplicationUser { get; set; }
 
-        //TODO: Fix these properties.
-        //public int BeerID { get; set; }
-        //public Beer Beer { get; set; }
-
-        public string BeerID { get; set; }
+        public int BeerID { get; set; }
+        public Beer Beer { get; set; }
 
         public int Rating { get; set; }
         public string Review { get; set; }

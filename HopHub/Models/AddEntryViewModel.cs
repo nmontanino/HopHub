@@ -8,8 +8,8 @@ namespace HopHub.Models
 {
     public class AddEntryViewModel
     {   
-
         public string BeerID { get; set; }
+        public string BeerName { get; set; }
 
         [Required]
         [Range(1,5)]

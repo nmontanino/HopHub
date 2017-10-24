@@ -103,7 +103,7 @@ function singleBeer(beerId) {
             }
             $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             $('.info').append(`<br>`);
-            $('.info').append(`<a href="/Entry/Add?id=${beer.id}" role="button" class="btn btn-primary">Add ${beer.name} to your log!</a>`);
+            $('.info').append(`<a href="/Entry/Add?id=${beer.id}&name=${beer.name}" role="button" class="btn btn-primary">Add ${beer.name} to your log!</a>`);
         }
     });
 }

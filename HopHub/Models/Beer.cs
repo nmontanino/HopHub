@@ -10,6 +10,7 @@ namespace HopHub.Models
     {   
         // Primary Key
         public int ID { get; set; }
+        public string Name { get; set; }
 
         // ID of beer from BreweryDB API
         public string ReferenceID { get; set; }

@@ -68,6 +68,7 @@ function singleBeer(beerId) {
             console.log(response);
 
             $('.info').empty();
+            $('.top').empty();
 
             let beer = response.data;
             let abv = beer.abv;
@@ -77,16 +78,18 @@ function singleBeer(beerId) {
 
             let image = beer.labels;
 
-            if (typeof image !== 'undefined') {
-                $('.info').append(`<img src="${image.medium}">`);
-            }
+            // TODO: Put image back in once layout is fixed
 
-            $('.info').append(`<h3>${beer.name}</h3>`);
-            $('.info').append(`<h4>${beer.style.name}</h4>`);
-            $('.info').append(`<h4>${beer.breweries[0].name}</a></h4>`);
+            //if (typeof image !== 'undefined') {
+            //    $('.info').append(`<img src="${image.medium}">`);
+            //}
+
+            $('.top').append(`<h4>${beer.name}</h4>`);
+            $('.top').append(`<h4>${beer.style.name}</h4>`);
+            $('.top').append(`<h4>${beer.breweries[0].name}</a></h4>`);
 
             if (typeof abv !== 'undefined') {
-                $('.info').append(`<h4>ABV: ${abv}%</h4>`);
+                $('.top').append(`<h4>ABV: ${abv}%</h4>`);
             }
             $('.info').append(`<br>`);
 
@@ -103,7 +106,7 @@ function singleBeer(beerId) {
             }
             $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             $('.info').append(`<br>`);
-            $('.info').append(`<a href="/Entry/Add?id=${beer.id}&name=${beer.name}" role="button" class="btn btn-primary">Add ${beer.name} to your log!</a>`);
+            $('.info').append(`<a href="/Entry/Add?id=${beer.id}&name=${beer.name}" role="button" class="btn btn-primary">Add ${beer.name} To Your Log</a>`);
         }
     });
 }

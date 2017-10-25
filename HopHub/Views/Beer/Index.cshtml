@@ -2,13 +2,16 @@
 <br />
 <div class="panel panel-default">
     <div class="panel-body">
+        <div class="top"></div>
         @if (Model.AvgRating > 0)
         {
-            <p><b>Average user rating: @String.Format("{0:0.#}", Model.AvgRating) out of 5</b></p>
+            <hr />
+            <h6>Average User Rating: @String.Format("{0:0.#}", Model.AvgRating) out of 5</h6>
         }
         else
         {
-            <p><b>This beer has not yet been rated.</b></p>
+            <hr />
+            <h6>This beer has not yet been rated.</h6>
         }
         <div class="info"></div>
     </div>
@@ -21,9 +24,9 @@
     {
         <div class="panel panel-default">
             <div class="panel-body">
-                <p>@entry.Review</p>
+                <h6>@entry.Review</h6>
                 <p>Rating: @entry.Rating out of 5</p>
-                <p>Made by anonymous on @entry.TimeStamp</p>
+                <small>Made by anonymous on @entry.TimeStamp</small>
             </div>
         </div>
     }

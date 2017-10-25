@@ -1,12 +1,13 @@
 ﻿@model IList<Entry>
 
-@*<h3 class="page-header">Entry Log</h3>*@
+@*<h3 class="page-header">Displaying (@Model.Count) Entries</h3>*@
 <br />
+<h4>Displaying (@Model.Count) Entries</h4>
 <br />
 
 @if (Model.Count == 0)
 {
-    <h4>There are no beers in your log yet.</h4>
+    <h5>There are no beers in your log yet.</h5>
     <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add a Beer</a></p>
 }
 else
@@ -36,33 +37,3 @@ else
     </div>
     <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>
 }
-
-
-@*else
-{
-    <table class="table table-hover">
-        <tr>
-            <th>Beer</th>
-            <th>Rating</th>
-            <th>Average Rating</th>
-            <th>Review</th>
-            <th>Comments</th>
-            <th>Location</th>
-            <th>Timestamp</th>
-        </tr>
-
-    @foreach (var entry in Model.Reverse())
-    {
-        <tr>
-            <td><a href="/Beer?id=@entry.Beer.ReferenceID">@entry.Beer.Name</a></td>
-            <td>@entry.Rating</td>
-            <td>@String.Format("{0:0.#}", entry.Beer.AvgRating)</td>
-            <td>@entry.Review</td>
-            <td>@entry.UserComments</td>
-            <td>@entry.Location</td>
-            <td>@entry.TimeStamp</td>
-        </tr>
-    }
-    </table>
-    <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-primary">Add Another Beer</a></p>
-}*@

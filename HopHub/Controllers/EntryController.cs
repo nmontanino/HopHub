@@ -29,8 +29,7 @@ namespace HopHub.Controllers
                 // Get all entries associated with the current user
                 string userID = _userManager.GetUserId(HttpContext.User);
 
-                IList<Entry> entries = context
-                    .Entries
+                IList<Entry> entries = context.Entries
                     .Include(item => item.Beer)
                     .Where(e => e.ApplicationUserID == userID)
                     .ToList();
@@ -78,7 +77,8 @@ namespace HopHub.Controllers
                 }
                 
                 // Get beer object by reference ID
-                Beer existingBeer = context.Beers.Single(b => b.ReferenceID == addEntryVM.BeerID);
+                Beer existingBeer = context.Beers
+                    .Single(b => b.ReferenceID == addEntryVM.BeerID);
                 
                 // Create new Entry
                 Entry userEntry = new Entry

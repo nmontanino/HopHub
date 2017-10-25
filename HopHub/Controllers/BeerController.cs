@@ -46,13 +46,11 @@ namespace HopHub.Controllers
             if (beerExists)
             {
                 // If beer already in db get beer object by ID
-                Beer existingBeer = context
-                    .Beers
+                Beer existingBeer = context.Beers
                     .Single(b => b.ReferenceID == id);
 
                 // Get list of entries of that specific beer that includes a review
-                IList<Entry> entries = context
-                    .Entries
+                IList<Entry> entries = context.Entries
                     .Where(e => e.Beer.ReferenceID == id)
                     .Where(e => e.Review != null)
                     .Include(e => e.ApplicationUser)

@@ -3,19 +3,24 @@
 }
 <br />
 <br />
+<br />
 <form asp-controller="Home" asp-action="Search" method="get">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <div id="mainLogo"><img src="~/images/noun_3235_cc-wht-lg.svg" width="350px"/></div>
-            <br />
-            <br />
-            <div class="input-group">
-                <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary submit_beer" type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+            <div class="thumbnail">
+                <img src="~/images/noun_3235_cc-wht-lg.svg"/>
+                <div class="caption">
+                    <h2 id="mainLogo">HopHub</h2>
+                    <p id="mainLogo">Your Craft Beer Directory</p>
+                    <div class="input-group">
+                        <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success submit_beer" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -43,24 +43,24 @@
                     @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
                     @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
+                @*<form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-success">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
-                </form>
+                </form>*@
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
-        @*<hr />
+        <hr />
         <footer>
             <p>&copy; 2017 - HopHub</p>
-        </footer>*@
+        </footer>
     </div>
 
     <environment include="Development">

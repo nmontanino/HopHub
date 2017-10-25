@@ -35,7 +35,7 @@ namespace HopHub.Controllers
                     .Where(e => e.ApplicationUserID == userID)
                     .ToList();
 
-                return View(entries.Reverse());
+                return View(entries);
             }
             return Redirect("/Account/Login");
         }

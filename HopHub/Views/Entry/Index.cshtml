@@ -14,17 +14,19 @@ else
             <th>Name</th>
             <th>User Rating</th>
             <th>Average Rating</th>
+            <th>User Review</th>
             <th>Comments</th>
             <th>Location</th>
             <th>Timestamp</th>
         </tr>
 
-    @foreach (var entry in Model)
+    @foreach (var entry in Model.Reverse())
     {
         <tr>
             <td><a href="/Beer?id=@entry.Beer.ReferenceID">@entry.Beer.Name</a></td>
             <td>@entry.Rating</td>
             <td>@String.Format("{0:0.#}", entry.Beer.AvgRating)</td>
+            <td>@entry.Review</td>
             <td>@entry.UserComments</td>
             <td>@entry.Location</td>
             <td>@entry.TimeStamp</td>

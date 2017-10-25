@@ -14,18 +14,7 @@ namespace HopHub.Models
         // ID of beer from BreweryDB API
         public string ReferenceID { get; set; }
 
-        // Average user rating
         public double? AvgRating { get; set; }
-
         public IList<Entry> Entries { get; set; }
-
-        //public override string ToString()
-        //{
-        //    if (AvgRating == 1)
-        //    {
-        //        return "★";
-        //    }
-        //    return "This beer has not yet been rated";
-        //}
     }
 }

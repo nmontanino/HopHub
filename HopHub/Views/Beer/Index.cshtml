@@ -1,19 +1,41 @@
 ﻿@model Beer
-
 <br />
 <div class="panel panel-default">
     <div class="panel-body">
         @if (Model.AvgRating > 0)
         {
-            <h4>Average user rating: @Model.AvgRating</h4>
+            <p><b>Average user rating: @String.Format("{0:0.#}", Model.AvgRating) out of 5</b></p>
         }
         else
         {
-            <h4>Average user rating: <i>Not yet rated.</i></h4>
+            <p><b>This beer has not yet been rated.</b></p>
         }
         <div class="info"></div>
     </div>
 </div>
+
+@if (Model.AvgRating > 0)
+{
+    <h5>(@Model.Entries.Count) User Reviews</h5>
+    @foreach (var entry in Model.Entries)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>@entry.Review</p>
+                <p>Rating: @entry.Rating out of 5</p>
+                <p>Made by anonymous on @entry.TimeStamp</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h5>No Reviews Yet</h5>
+    </div>
+</div>
+}
 
 @*<div class="well">
     <div class="info"></div>

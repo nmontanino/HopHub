@@ -42,19 +42,22 @@ namespace HopHub.Controllers
         public IActionResult Index(string id)
         {
             bool beerExists = context.Beers.Any(b => b.ReferenceID == id);
-            //bool entryExists = context.Entries.Any(e => e.Beer.ReferenceID == id);
 
             if (beerExists)
             {
+                // If beer already in db get beer object by ID
                 Beer existingBeer = context
                     .Beers
                     .Single(b => b.ReferenceID == id);
 
-                //IList<Entry> entries = context
-                //    .Entries
-                //    .Where(e => e.Beer.ReferenceID == id)
-                //    .ToList();
+                // Get list of entries of that specific beer that includes a review
+                IList<Entry> entries = context
+                    .Entries
+                    .Where(e => e.Beer.ReferenceID == id)
+                    .Where(e => e.Review != null)
+                    .ToList();
 
+                existingBeer.Entries = entries;
                 return View(existingBeer);
             }
             return View(new Beer());

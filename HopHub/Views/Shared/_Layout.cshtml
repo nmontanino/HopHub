@@ -33,16 +33,24 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img src="~/images/noun_3235_cc-wht-lg.svg" width="20" height="20" />
+                    @*<img src="~/images/noun_3235_cc-wht-lg.svg" width="20" height="20" />*@HopHub
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
                     <li><a asp-area="" asp-controller="Entry" asp-action="Index">Entries</a></li>
-                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                 </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>

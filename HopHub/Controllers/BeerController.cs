@@ -55,6 +55,7 @@ namespace HopHub.Controllers
                     .Entries
                     .Where(e => e.Beer.ReferenceID == id)
                     .Where(e => e.Review != null)
+                    .Include(e => e.ApplicationUser)
                     .ToList();
 
                 existingBeer.Entries = entries;

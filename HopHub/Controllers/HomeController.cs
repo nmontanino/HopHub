@@ -21,10 +21,10 @@ namespace HopHub.Controllers
             Configuration = config;
         }
 
-        public object GetBeer(string beer)
+        public object GetBeer(string beer, string type="beer")
         {
             string key = Configuration["APIKey"];
-            string uri = $"https://api.brewerydb.com/v2/search?q={beer}&type=beer&withBreweries=Y&key={key}";
+            string uri = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&withBreweries=Y&key={key}";
 
             HttpResponse<string> beerResults = Unirest.get(uri).asJson<string>();
 
@@ -41,6 +41,16 @@ namespace HopHub.Controllers
         public IActionResult Search()
         {
             // Display search results
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
             return View();
         }
 

@@ -26,7 +26,7 @@
             <div class="panel-body">
                 <h6>@entry.Review</h6>
                 <p>Rating: @entry.Rating out of 5</p>
-                <small>Made by anonymous on @entry.TimeStamp</small>
+                <small>Made by @entry.ApplicationUser.UserName on @entry.TimeStamp</small>
             </div>
         </div>
     }
@@ -36,6 +36,7 @@ else
 <div class="panel panel-default">
     <div class="panel-body">
         <h5>No Reviews Yet</h5>
+        <p>Be the first to add a review for this beer.</p>
     </div>
 </div>
 }

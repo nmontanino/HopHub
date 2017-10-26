@@ -69,24 +69,24 @@ function singleBeer(beerId) {
 
             $('.info').empty();
             $('.top').empty();
+            $('.media-right').empty();
 
             let beer = response.data;
             let abv = beer.abv;
             let description = beer.description;
             let website = beer.breweries[0].website;
             let breweryDesc = beer.breweries[0].description;
-
             let image = beer.labels;
 
-            // TODO: Put image back in once layout is fixed
-
-            //if (typeof image !== 'undefined') {
-            //    $('.info').append(`<img src="${image.medium}">`);
-            //}
-
+            if (typeof image !== 'undefined') {
+                $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="118px"></a>`);
+            } else {
+                $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);
+            }
+            
             $('.top').append(`<h4>${beer.name}</h4>`);
             $('.top').append(`<h4>${beer.style.name}</h4>`);
-            $('.top').append(`<h4>${beer.breweries[0].name}</a></h4>`);
+            $('.top').append(`<h4>${beer.breweries[0].name}</h4>`);
 
             if (typeof abv !== 'undefined') {
                 $('.top').append(`<h4>ABV: ${abv}%</h4>`);

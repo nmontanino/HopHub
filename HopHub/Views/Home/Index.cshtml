@@ -1,31 +1,49 @@
-﻿@{
+﻿@model IList<Beer>
+@using System.Linq
+@{
     ViewData["Title"] = "HopHub";
 }
 <br />
 <br />
 <br />
-<form asp-controller="Home" asp-action="Search" method="get">
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div class="col-sm-4">
+            @*<div class="thumbnail">*@
+                <div class="list-group">
+                    @foreach (var beer in Model.Take(5))
+                    {
+                        <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
+                            <span class="badge">@String.Format("{0:0.#}", beer.AvgRating)</span>
+                            <h4 class="list-group-item-heading">@beer.Name</h4>
+                            <p class="list-group-item-text">Average user rating: @String.Format("{0:0.##}", beer.AvgRating) out of 5</p>
+                            <p class="list-group-item-text">Tried @beer.Entries.Count() times.</p>
+                        </a>
+                    }
+                </div>
+            @*</div>*@
+        </div>
+        @*<div class="col-sm-4 col-sm-offset-4">*@
+        <div class="col-sm-4">
             <div class="thumbnail">
                 <br />
-                <img src="~/images/noun_3235_cc-gry2-lg.svg"/>
+                <img src="~/images/noun_3235_cc-gry2-lg.svg" />
                 <div class="caption">
                     <h2 id="mainLogo">HopHub</h2>
                     <p id="mainLogo">Your Craft Beer Directory</p>
-                    <div class="input-group">
-                        <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
+                    <form asp-controller="Home" asp-action="Search" method="get">
+                        <div class="input-group">
+                            <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</form>
 
 
 

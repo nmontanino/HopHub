@@ -16,11 +16,11 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-
+    <!-- These scripts were moved up from the body in order to process ajax requests before pageload-->
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <!---->
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -32,16 +32,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    @*<img src="~/images/noun_3235_cc-wht-lg.svg" width="20" height="20" />*@HopHub
-                </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HopHub</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
                     <li><a asp-area="" asp-controller="Entry" asp-action="Index">Entries</a></li>
-                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
-                    @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                 </ul>
                 <form asp-controller="Home" asp-action="Search" class="navbar-form navbar-left" role="search">
                     <div class="input-group">

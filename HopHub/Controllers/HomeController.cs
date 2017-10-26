@@ -9,15 +9,19 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using unirest_net.http;
 using Microsoft.Extensions.Configuration;
+using HopHub.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HopHub.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext context;
         public IConfiguration Configuration { get; set; }
 
-        public HomeController(IConfiguration config)
+        public HomeController(ApplicationDbContext dbContext, IConfiguration config)
         {
+            context = dbContext;
             Configuration = config;
         }
 
@@ -34,8 +38,14 @@ namespace HopHub.Controllers
 
         public IActionResult Index()
         {
+            //ViewBag.ratings = context.Beers.All(b => b.AvgRating != null);
+            IList<Beer> topRated = context.Beers
+                .OrderByDescending(b => b.AvgRating)
+                .Include(b => b.Entries)
+                .ToList();
+
             // Display search bar
-            return View();
+            return View(topRated);
         }
 
         public IActionResult Search()

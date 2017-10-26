@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - HopHub</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-cyborg.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/style.css" />
     </environment>
@@ -23,7 +23,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,12 +44,14 @@
                     @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
                 </ul>
                 <form asp-controller="Home" asp-action="Search" class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" name="beer" class="form-control" placeholder="Search">
+                    <div class="input-group">
+                        <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
                     </div>
-                    <button type="submit" name="beer" class="btn btn-success">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
                 </form>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

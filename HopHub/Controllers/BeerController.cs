@@ -1,15 +1,12 @@
-﻿using System;
+﻿using HopHub.Data;
+using HopHub.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HopHub.Models;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
 using unirest_net.http;
-using Microsoft.Extensions.Configuration;
-using HopHub.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace HopHub.Controllers
 {

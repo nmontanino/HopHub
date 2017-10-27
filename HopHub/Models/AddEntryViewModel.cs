@@ -23,6 +23,5 @@ namespace HopHub.Models
 
         [Display(Name = "Purchase location (optional)")]
         public string Location { get; set; }
-
     }
 }

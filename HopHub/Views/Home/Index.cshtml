@@ -15,7 +15,7 @@
                 {
                     <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
                         <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
-                        <p class="list-group-item-text">@beer.Name</p>
+                        <h5 class="list-group-item-heading">@beer.Name</h5>
                         <small class="list-group-item-text">@beer.Entries.Count() log entries</small>
                     </a>
                 }

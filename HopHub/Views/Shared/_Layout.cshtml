@@ -39,7 +39,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
                     <li><a asp-area="" asp-controller="Entry" asp-action="Index">Entries</a></li>
                 </ul>
-                <form asp-controller="Home" asp-action="Search" class="navbar-form navbar-left" role="search">
+                <form asp-controller="Home" asp-action="Search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="input-group">
                         <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
                         <span class="input-group-btn">
@@ -70,9 +70,7 @@
     </div>
 
     <environment include="Development">
-        @*<script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>*@
+        <!-- These scripts were moved up up to the header -->
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

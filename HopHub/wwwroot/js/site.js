@@ -28,18 +28,6 @@ function getBeers(query) {
                 let styleDesc = beers[i].style.description;
                 let beerId = beers[i].id;
 
-                //if (typeof abv !== 'undefined') { avb = null }
-                //if (typeof description !== 'undefined') { description = null }
-                
-                //$('.results').html(`<div class="list-group"><a href="/Beer?id=${beerId}" class="list-group-item">
-                //    <h4 class="list-group-item-heading">${name}</h4>
-                //    <h4 class="list-group-item-heading">${styleName}</h4>
-                //    <h4 class="list-group-item-heading">${beers[i].breweries[0].name}</h4>
-                //    <h4 class="list-group-item-heading">ABV: ${abv}%</h4>
-                //    <p class="list-group-item-text">${description}</p>
-                //    <p class="list-group-item-text">Style Description: ${styleDesc}</p></a></div>`);
-
-
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
                 $('.results').append(`${styleName}<br>`);
                 $('.results').append(`${beers[i].breweries[0].name}<br>`);
@@ -79,7 +67,6 @@ function singleBeer(beerId) {
             let image = beer.labels;
 
             if (typeof image !== 'undefined') {
-                //$('.media-right').wrapInner(`<div class="panel panel-default"><div class=panel-body><img class="media-object" src="${image.medium}" height="118px"></div></div>`);
                 $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
             } else {
                 $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);

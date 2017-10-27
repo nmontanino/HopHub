@@ -1,10 +1,7 @@
 ﻿@model IList<Beer>
-
-@using System.Linq
 @{
     ViewData["Title"] = "HopHub";
 }
-<br />
 <br />
 <br />
 <div class="row">
@@ -13,20 +10,18 @@
             <div class="panel-heading">
                 <h4 class="panel-title">Highest Rated Beers</h4>
             </div>
-
             <div class="list-group">
-                @foreach (var beer in Model.Take(10))
+                @foreach (var beer in Model)
                 {
                     <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
                         <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
                         <p class="list-group-item-text">@beer.Name</p>
-                       
+                        <small class="list-group-item-text">@beer.Entries.Count() log entries</small>
                     </a>
                 }
             </div>
         </div>
     </div>
-    @*<div class="col-sm-4 col-sm-offset-4">*@
     <div class="col-sm-4">
         <div class="thumbnail">
             <br />
@@ -50,7 +45,7 @@
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">Recent User Reviews</h4>
+                <h4 class="panel-title">Recent Reviews</h4>
             </div>
             <div class="list-group">
                 @foreach (var review in ViewBag.recent)
@@ -59,7 +54,7 @@
                         <span class="badge">@review.Rating ★</span>
                         <h4 class="list-group-item-heading">@review.Beer.Name</h4>
                         <p class="list-group-item-text">@review.Review</p>
-                        <small class="list-group-item-text">- @review.ApplicationUser.UserName at @review.TimeStamp</small>
+                        <small class="list-group-item-text">@review.TimeStamp</small>
                     </a>
                 }
             </div>

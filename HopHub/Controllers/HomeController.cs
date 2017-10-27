@@ -41,6 +41,7 @@ namespace HopHub.Controllers
             // Get list of beer ordered by highest average rating
             IList<Beer> topRated = context.Beers
                 .OrderByDescending(b => b.AvgRating)
+                .Take(5)
                 .Include(b => b.Entries)
                 .ToList();
 
@@ -50,8 +51,7 @@ namespace HopHub.Controllers
                 .Where(e => e.Review != null)
                 .OrderByDescending(e => e.TimeStamp)
                 .Include(e => e.Beer)
-                .Include(e => e.ApplicationUser)
-                .Take(5)
+                .Take(3)
                 .ToList();
 
             ViewBag.recent = recentReviews;

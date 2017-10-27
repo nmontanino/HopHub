@@ -1,14 +1,13 @@
 ﻿@model IList<Entry>
-
-@*<h3 class="page-header">Displaying (@Model.Count) Entries</h3>*@
 <br />
-<h4>Displaying (@Model.Count) Entries</h4>
 <br />
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Displaying (@Model.Count) Entries</h4>
+    </div>
 @if (Model.Count == 0)
 {
-    <h5>There are no beers in your log yet.</h5>
-    <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add a Beer</a></p>
+    <h4>There are no beers in your log yet.</h4>
 }
 else
 {
@@ -17,7 +16,7 @@ else
         {
         <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
             <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
-            <h6>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</h6>
+            <h5><b>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
             @if (entry.Review != null)
             {
                 <p class="list-group-item-text">Review: @entry.Review</p>
@@ -30,10 +29,10 @@ else
             {
                 <p class="list-group-item-text">Purchase Location: @entry.Location</p>
             }
-            <br />
-            <small class="list-group-item-text">Added on: @entry.TimeStamp</small>
+            <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
         </a>
         }
     </div>
-    <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>
 }
+</div>
+<p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>

@@ -16,7 +16,6 @@ namespace HopHub.Controllers
     public class BeerController : Controller
     {
         private ApplicationDbContext context;
-
         public IConfiguration Configuration { get; set; }
 
         public BeerController(ApplicationDbContext dbContext, IConfiguration config)

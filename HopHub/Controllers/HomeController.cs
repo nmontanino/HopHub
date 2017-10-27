@@ -38,13 +38,23 @@ namespace HopHub.Controllers
 
         public IActionResult Index()
         {
-            //ViewBag.ratings = context.Beers.All(b => b.AvgRating != null);
+            // Get list of beer ordered by highest average rating
             IList<Beer> topRated = context.Beers
                 .OrderByDescending(b => b.AvgRating)
                 .Include(b => b.Entries)
                 .ToList();
 
-            // Display search bar
+            // Get list of entries sorted by time
+            IList<Entry> recentReviews = context
+                .Entries
+                .Where(e => e.Review != null)
+                .OrderByDescending(e => e.TimeStamp)
+                .Include(e => e.Beer)
+                .Include(e => e.ApplicationUser)
+                .Take(5)
+                .ToList();
+
+            ViewBag.recent = recentReviews;
             return View(topRated);
         }
 

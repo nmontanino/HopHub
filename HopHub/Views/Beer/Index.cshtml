@@ -1,36 +1,39 @@
 ﻿@model Beer
 <br />
+<br />
 <div class="panel panel-default">
-    <div class="panel-body">
-        <div class="media">
-            <div class="media-body">
-                <h4 class="media-heading top"></h4>
-            </div>
-            <div class="media-right"></div>
-        </div>
+    <div class="panel-heading">
         @if (Model.AvgRating > 0)
         {
-            <hr />
-            <h6>Average User Rating: @String.Format("{0:0.#}", Model.AvgRating) out of 5</h6>
+            <h4 class="panel-title">Average User Rating: @String.Format("{0:0.#}", Model.AvgRating) out of 5</h4>
         }
         else
         {
-            <hr />
-            <h6>This beer has not yet been rated.</h6>
+            <h4 class="panel-title">This beer has not yet been rated.</h4>
         }
+    </div>
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-body">
+                <div class="media-heading top"></div>
+            </div>
+            <div class="media-right"></div>
+        </div>
         <div class="info"></div>
     </div>
 </div>
 
 @if (Model.AvgRating > 0)
 {
-    <h5>(@Model.Entries.Count) User Reviews</h5>
+    <h4>(@Model.Entries.Count) User Reviews</h4>
     @foreach (var entry in Model.Entries)
     {
         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Rating: @entry.Rating out of 5</h4>
+            </div>
             <div class="panel-body">
-                <h6>@entry.Review</h6>
-                <p>Rating: @entry.Rating out of 5</p>
+                <p>@entry.Review</p>
                 <small>Made by @entry.ApplicationUser.UserName on @entry.TimeStamp</small>
             </div>
         </div>

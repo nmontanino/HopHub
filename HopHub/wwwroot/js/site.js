@@ -79,7 +79,8 @@ function singleBeer(beerId) {
             let image = beer.labels;
 
             if (typeof image !== 'undefined') {
-                $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="118px"></a>`);
+                //$('.media-right').wrapInner(`<div class="panel panel-default"><div class=panel-body><img class="media-object" src="${image.medium}" height="118px"></div></div>`);
+                $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
             } else {
                 $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);
             }

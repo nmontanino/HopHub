@@ -44,7 +44,7 @@
 /*body {
     height: 100%;
     margin: 0px;
-    background: url(https://static.pexels.com/photos/63633/bar-local-cong-ireland-63633.jpeg) no-repeat center center;
+    background: url(https://static.pexels.com/photos/3540/restaurant-alcohol-bar-drinks.jpg) no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
 }*/
@@ -78,5 +78,6 @@
         }
 
 .checked {
-    color: #93c54b !important;
+    /*color: #93c54b !important;*/
+    color: #E7C049 !important;
 }

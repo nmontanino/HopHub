@@ -16,7 +16,8 @@
                     <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
                         <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
                         <h5 class="list-group-item-heading">@beer.Name</h5>
-                        <small class="list-group-item-text">@beer.Entries.Count() total log entries</small>
+                        @*<p class="list-group-item-text">Average Rating: @String.Format("{0:0.#}", beer.AvgRating) out of 5</p>*@
+                        <small class="list-group-item-text">@beer.Entries.Count() log entries</small>
                     </a>
                 }
             </div>
@@ -25,7 +26,7 @@
     <div class="col-sm-4">
         <div class="thumbnail">
             <br />
-            <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo"/>
+            <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo" />
             <div class="caption">
                 <h2 id="mainLogo">HopHub</h2>
                 <p id="mainLogo">Your Craft Beer Directory</p>
@@ -51,7 +52,26 @@
                 @foreach (var review in ViewBag.recent)
                 {
                     <a href="/Beer?id=@review.Beer.ReferenceID" class="list-group-item">
-                        <span class="badge">@review.Rating ★</span>
+                        @*<span class="badge">@review.Rating ★</span>*@
+                        <!-- Rating -->
+                        <div class="pull-right">
+                            <div class="rating">
+                                @for (int x = 5; x >= 1; x--)
+                                {
+                                    if (x <= review.Rating)
+                                    {
+                                        <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
+                                        <label class="checked" for="@review.ID+@x" style="font-size: 110%;"></label>
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
+                                        <label for="@review.ID+@x" style="font-size: 110%;"></label>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!-- Rating -->
                         <h4 class="list-group-item-heading">@review.Beer.Name</h4>
                         <p class="list-group-item-text">@review.Review</p>
                         <small class="list-group-item-text">@review.TimeStamp</small>

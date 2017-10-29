@@ -36,6 +36,25 @@
                 <h4 class="panel-title">Rating: @entry.Rating out of 5</h4>
             </div>
             <div class="panel-body">
+                <!-- Rating -->
+                <div class="pull-right">
+                    <div class="rating">
+                        @for (int x = 5; x >= 1; x--)
+                        {
+                            if (x <= entry.Rating)
+                            {
+                                <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                <label class="checked" for="@entry.ID+@x" style="font-size: 125%;"></label>
+                            }
+                            else
+                            {
+                                <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                <label for="@entry.ID+@x" style="font-size: 125%;"></label>
+                            }
+                        }
+                    </div>
+                </div>
+                <!-- Rating -->
                 <p>@entry.Review</p>
                 <small>Made by @entry.ApplicationUser.UserName on @entry.TimeStamp</small>
             </div>
@@ -51,4 +70,3 @@ else
     </div>
 </div>
 }
-

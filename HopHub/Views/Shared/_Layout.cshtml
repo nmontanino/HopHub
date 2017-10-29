@@ -36,12 +36,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Entry" asp-action="Index">Entries</a></li>
                 </ul>
                 <form asp-controller="Home" asp-action="Search" method="get" class="navbar-form navbar-left" role="search">
                     <div class="input-group">
-                        <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                        <input type="search" class="form-control beer" name="beer" placeholder="Search">
                         <span class="input-group-btn">
                             <button class="btn btn-success" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -68,7 +68,6 @@
             </div>
         </footer>
     </div>
-
     <environment include="Development">
         <!-- These scripts were moved up up to the header -->
     </environment>

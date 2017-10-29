@@ -16,7 +16,7 @@
                     <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
                         <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
                         <h5 class="list-group-item-heading">@beer.Name</h5>
-                        <small class="list-group-item-text">@beer.Entries.Count() log entries</small>
+                        <small class="list-group-item-text">@beer.Entries.Count() total log entries</small>
                     </a>
                 }
             </div>
@@ -25,13 +25,13 @@
     <div class="col-sm-4">
         <div class="thumbnail">
             <br />
-            <img src="~/images/noun_3235_cc-gry2-lg.svg" />
+            <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo"/>
             <div class="caption">
-                <h1 id="mainLogo">HopHub</h1>
+                <h2 id="mainLogo">HopHub</h2>
                 <p id="mainLogo">Your Craft Beer Directory</p>
                 <form asp-controller="Home" asp-action="Search" method="get">
                     <div class="input-group">
-                        <input type="search" class="form-control beer" name="beer" placeholder="Search for beer...">
+                        <input type="search" class="form-control" name="beer" placeholder="Search for beer...">
                         <span class="input-group-btn">
                             <button class="btn btn-success" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -61,8 +61,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-

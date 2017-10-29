@@ -4,9 +4,9 @@
 }
 <br />
 <br />
-<!-- Div class row-->
+<!-- Row -->
 <div class="row">
-    <!-- Div class column one-->
+    <!-- Coulmn One-->
     <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -22,6 +22,25 @@
                     @foreach (var entry in Model.Reverse())
                     {
                         <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
+                            <!-- Rating -->
+                            <div class="pull-right">
+                                <div class="rating">
+                                    @for (int x = 5; x >= 1; x--)
+                                    {
+                                        if (x <= entry.Rating)
+                                        {
+                                            <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                            <label class="checked" for="@entry.ID+@x"></label>
+                                        }
+                                        else
+                                        {
+                                            <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                            <label for="@entry.ID+@x"></label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <!-- Rating -->
                             <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
                             <h5><b>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
                             @if (entry.Review != null)
@@ -43,7 +62,7 @@
             }
         </div>
     </div>
-    <!-- Div column two-->
+    <!-- Column Two -->
     <div class="col-sm-3">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -52,7 +71,7 @@
             <div class="list-group">
                 @{ 
                     int i = 0;
-                    if (Model.Count() > 5)
+                    if (Model.Count() >= 5)
                     {
                         i = 5;
                     }
@@ -73,6 +92,6 @@
         </div>
         <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>
     </div>
-    <!-- End column two-->
+    <!-- End Column Two -->
 </div>
-<!-- End row-->
+<!-- End Row-->

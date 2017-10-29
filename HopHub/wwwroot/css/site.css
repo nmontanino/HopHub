@@ -39,3 +39,44 @@
     text-align:center;
     padding-top:0px;
 }
+
+/* Background image */
+/*body {
+    height: 100%;
+    margin: 0px;
+    background: url(https://static.pexels.com/photos/63633/bar-local-cong-ireland-63633.jpeg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}*/
+
+/* Star ratings */
+.rating {
+    float: left;
+    border: none;
+}
+
+    .rating > input {
+        position: absolute;
+        top: -9999px;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .rating > label {
+        float: right;
+        width: 1em;
+        padding: 0 .1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 175%;
+        line-height: 1.2;
+        color: #ddd;
+    }
+
+        .rating > label:before {
+            content: '★ ';
+        }
+
+.checked {
+    color: #93c54b !important;
+}

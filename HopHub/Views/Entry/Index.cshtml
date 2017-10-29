@@ -4,38 +4,75 @@
 }
 <br />
 <br />
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">Displaying (@Model.Count) Entries</h4>
+<!-- Div class row-->
+<div class="row">
+    <!-- Div class column one-->
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Displaying (@Model.Count) Entries</h4>
+            </div>
+            @if (Model.Count == 0)
+            {
+                <h4>There are no beers in your log yet.</h4>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var entry in Model.Reverse())
+                    {
+                        <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
+                            <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
+                            <h5><b>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
+                            @if (entry.Review != null)
+                            {
+                                <p class="list-group-item-text">Review: @entry.Review</p>
+                            }
+                            @if (entry.UserComments != null)
+                            {
+                                <p class="list-group-item-text">Comments: @entry.UserComments</p>
+                            }
+                            @if (entry.Location != null)
+                            {
+                                <p class="list-group-item-text">Purchase Location: @entry.Location</p>
+                            }
+                            <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
     </div>
-@if (Model.Count == 0)
-{
-    <h4>There are no beers in your log yet.</h4>
-}
-else
-{
-    <div class="list-group">
-        @foreach (var entry in Model.Reverse())
-        {
-        <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
-            <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
-            <h5><b>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
-            @if (entry.Review != null)
-            {
-                <p class="list-group-item-text">Review: @entry.Review</p>
-            }
-            @if (entry.UserComments != null)
-            {
-                <p class="list-group-item-text">Comments: @entry.UserComments</p>
-            }
-            @if (entry.Location != null)
-            {
-                <p class="list-group-item-text">Purchase Location: @entry.Location</p>
-            }
-            <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
-        </a>
-        }
+    <!-- Div column two-->
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Your top rated beers</h4>
+            </div>
+            <div class="list-group">
+                @{ 
+                    int i = 0;
+                    if (Model.Count() > 5)
+                    {
+                        i = 5;
+                    }
+                    else
+                    {
+                        i = Model.Count();
+
+                    }
+                }
+                @foreach (var entry in Model.OrderByDescending(e => e.Rating).Take(i))
+                {
+                    <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
+                        <span class="badge">@entry.Rating ★</span>
+                        <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
+                    </a>
+                }
+            </div>
+        </div>
+        <p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>
     </div>
-}
+    <!-- End column two-->
 </div>
-<p><a asp-controller="Home" asp-action="Index" role="button" class="btn btn-success">Add Another Beer</a></p>
+<!-- End row-->

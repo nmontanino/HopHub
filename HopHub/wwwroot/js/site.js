@@ -1,18 +1,17 @@
 ﻿'use strict';
 
-function getBeers(query) {
+function getBeers(query, pageNum) {
     $.ajax({
-        url: "/home/getbeer?beer=" + query,
+        url: "/home/getbeer?beer=" + query + "&pageNum=" + pageNum,
         success: function (response) {
             console.log(response);
 
-            // TODO: Paginate results to display 10 results per page. 50 results max.
-
             $('.results').empty();
             let beers = response.data;
+            let numResults = response.totalResults;
 
             if (typeof beers !== 'undefined') {
-                $('.results').append(`<i>Displaying ${beers.length} results.</i><br>`);
+                $('.results').append(`<i>Displaying ${beers.length} out of ${numResults} results.</i><br>`);
                 $('.results').append("<br>");
             } else {
                 $('.results').append("<i>No search results.</i>"); 
@@ -45,6 +44,16 @@ function getBeers(query) {
 
                 $('.results').append(`Style Description: ${styleDesc}<br>`);
                 $('.results').append("<hr>");
+            }
+
+            // Paginates results to display 50 results per page.
+            $('.pagination').empty();
+            var pages = response.numberOfPages;
+
+            if (pages > 1) {
+                for (var p = 0; p < pages; p++) {
+                    $('.pagination').append(`<li><a href="?beer=${query}&pageNum=${p + 1}">${p + 1}</a></li>`);
+                }
             }
         }
     });
@@ -111,7 +120,7 @@ $(document).ready(function () {
         }
     }
     if ($('.results').length) {
-        getBeers($.urlParam('beer'));
+        getBeers($.urlParam('beer'), $.urlParam('pageNum'));
     }
     if ($('.info').length) {
         singleBeer($.urlParam('id'));

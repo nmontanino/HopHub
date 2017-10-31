@@ -23,10 +23,12 @@ namespace HopHub.Controllers
             Configuration = config;
         }
 
-        public object GetBeer(string beer, string type="beer")
+        public object GetBeer(string beer, string pageNum = "1")
         {
+            string type = "beer";
             string key = Configuration["APIKey"];
-            string uri = $"https://api.brewerydb.com/v2/search?q={beer}&type={type}&withBreweries=Y&key={key}";
+            //string pageNum = 1.ToString();
+            string uri = $"https://api.brewerydb.com/v2/search?p={pageNum}&q={beer}&type={type}&withBreweries=Y&key={key}";
 
             HttpResponse<string> beerResults = Unirest.get(uri).asJson<string>();
 

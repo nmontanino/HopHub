@@ -27,7 +27,6 @@ namespace HopHub.Controllers
         {
             string type = "beer";
             string key = Configuration["APIKey"];
-            //string pageNum = 1.ToString();
             string uri = $"https://api.brewerydb.com/v2/search?p={pageNum}&q={beer}&type={type}&withBreweries=Y&key={key}";
 
             HttpResponse<string> beerResults = Unirest.get(uri).asJson<string>();

@@ -7,18 +7,20 @@ function getBeers(query, pageNum) {
             console.log(response);
 
             $('.results').empty();
-            $('.pagination').empty();
+            $('.pager').empty();
 
             let beers = response.data;
             let numResults = response.totalResults;
 
             // Paginates results to display 50 results per page.
             let pages = response.numberOfPages;
+            let currentPage = response.currentPage;
 
             if (pages > 1) {
-                for (var p = 0; p < pages; p++) {
-                    $('.pagination').append(`<li><a href="?beer=${query}&pageNum=${p + 1}">${p + 1}</a></li>`);
+                if (currentPage > 1) {
+                    $('.pager').append(`<li class="previous"><a href="?beer=${query}&pageNum=${currentPage - 1}">&larr; Previous</a></li>`);
                 }
+                $('.pager').append(`<li class="next"><a href="?beer=${query}&pageNum=${currentPage + 1}">Next &rarr;</a></li>`);
             }
 
             if (typeof beers !== 'undefined') {

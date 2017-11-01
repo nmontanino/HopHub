@@ -42,7 +42,7 @@
                             </div>
                             <!-- Rating -->
                             <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
-                            <h5><b>Rating: @entry.Rating out of 5 (Site Average: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
+                            <h5><b>Rating: @entry.Rating out of 5 (Average Rating: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
                             @if (entry.Review != null)
                             {
                                 <p class="list-group-item-text">Review: @entry.Review</p>

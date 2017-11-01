@@ -40,14 +40,6 @@
     padding-top:0px;
 }
 
-/* Background image */
-/*body {
-    height: 100%;
-    margin: 0px;
-    background: url(https://static.pexels.com/photos/3540/restaurant-alcohol-bar-drinks.jpg) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-}*/
 
 /* Star ratings */
 .rating {
@@ -78,7 +70,15 @@
         }
 
 .checked {
-    /*color: #93c54b !important;*/
-    /*color: #E7C049 !important;*/
-    color: #FABE28 !important;
+    color: #93c54b !important;
+    /*color: #FABE28 !important;*/
+}
+
+/* Background image */
+body {
+    height: 100%;
+    margin: 0px;
+    background: url(../images/caps_dark4.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
 }

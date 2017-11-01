@@ -40,6 +40,14 @@ function getBeers(query, pageNum) {
                 let beerId = beers[i].id;
                 let brewery = beers[i].breweries[0];
 
+                //let image = beers[i].labels;
+
+                //if (typeof image !== 'undefined') {
+                //    $('.results').append(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
+                //} else {
+                //    $('.results').append(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);
+                //}
+
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
 
                 if (typeof style !== 'undefined') {

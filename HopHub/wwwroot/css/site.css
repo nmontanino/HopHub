@@ -82,3 +82,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
+div.panel.panel-default{
+    opacity:0.95;
+}

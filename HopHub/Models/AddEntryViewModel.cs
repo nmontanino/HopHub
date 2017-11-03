@@ -15,13 +15,13 @@ namespace HopHub.Models
         [Range(1,5)]
         public int Rating { get; set; }
 
-        [Display(Name = "Add a review for this beer (optional)")]
+        [Display(Name = "Add a review for this beer")]
         public string Review { get; set; }
 
-        [Display(Name = "Notes or comments (optional)")]
+        [Display(Name = "Additional notes or comments")]
         public string UserComments { get; set; }
 
-        [Display(Name = "Purchase location (optional)")]
+        [Display(Name = "Purchase location")]
         public string Location { get; set; }
     }
 }

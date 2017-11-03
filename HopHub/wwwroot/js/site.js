@@ -12,10 +12,10 @@ function getBeers(query, pageNum) {
             let beers = response.data;
             let numResults = response.totalResults;
 
-            // Paginates results to display 50 results per page.
             let pages = response.numberOfPages;
             let currentPage = response.currentPage;
 
+            // Display 50 results per page
             if (pages > 1) {
                 if (currentPage > 1) {
                     $('.pager').append(`<li class="previous"><a href="?beer=${query}&pageNum=${currentPage - 1}">&larr; Previous</a></li>`);
@@ -23,8 +23,9 @@ function getBeers(query, pageNum) {
                 $('.pager').append(`<li class="next"><a href="?beer=${query}&pageNum=${currentPage + 1}">Next &rarr;</a></li>`);
             }
 
+            // Display number of results and page number
             if (typeof beers !== 'undefined') {
-                $('.results').append(`<i>Displaying ${beers.length} out of ${numResults} results.</i><br>`);
+                $('.results').append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`);
                 $('.results').append("<br>");
             } else {
                 $('.results').append("<i>No search results.</i>"); 
@@ -40,16 +41,13 @@ function getBeers(query, pageNum) {
                 let beerId = beers[i].id;
                 let brewery = beers[i].breweries[0];
 
-
-                // Images
-
-                //let image = beers[i].labels;
-
-                //if (typeof image !== 'undefined') {
-                //    $('.results').append(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
-                //} else {
-                //    $('.results').append(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);
-                //}
+                // Beer label images
+                let image = beers[i].labels;
+                if (typeof image !== 'undefined') {
+                    $('.results').append(`<div class="pull-right"><img class="img-circle" src="${image.icon}"><div>`);
+                } else {
+                    $('.results').append(`<div class="pull-right"><img class="thumbnail" src="/images/noun_3235_cc-gry2-lg.svg" height="64px"><div>`);
+                }
 
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
 

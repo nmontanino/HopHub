@@ -2,8 +2,6 @@
 @{
     ViewData["Title"] = "Log Entries";
 }
-<br />
-<br />
 <!-- Row -->
 <div class="row">
     <!-- Coulmn One-->
@@ -13,8 +11,10 @@
                 <h4 class="panel-title">Displaying (@Model.Count) Entries</h4>
             </div>
             @if (Model.Count == 0)
-            {
-                <h4>There are no beers in your log yet.</h4>
+            {   
+                <div class="panel-body">
+                    <p>There are no beers in your log yet.</p>
+                </div>
             }
             else
             {
@@ -45,15 +45,15 @@
                             <h5><b>Rating: @entry.Rating out of 5 (Average Rating: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
                             @if (entry.Review != null)
                             {
-                                <p class="list-group-item-text">Review: @entry.Review</p>
+                                <h5 class="list-group-item-heading">Review: @entry.Review</h5>
                             }
                             @if (entry.UserComments != null)
                             {
-                                <p class="list-group-item-text">Comments: @entry.UserComments</p>
+                                <h5 class="list-group-item-heading">Comments: @entry.UserComments</h5>
                             }
                             @if (entry.Location != null)
                             {
-                                <p class="list-group-item-text">Purchase Location: @entry.Location</p>
+                                <h5 class="list-group-item-heading">Location: @entry.Location</h5>
                             }
                             <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
                         </a>

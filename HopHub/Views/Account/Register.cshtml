@@ -2,9 +2,13 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<style>
+    body {
+        background-image: none;
+    }
+</style>
+<br />
 <h2>@ViewData["Title"]</h2>
-
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">

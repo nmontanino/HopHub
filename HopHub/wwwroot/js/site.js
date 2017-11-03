@@ -40,6 +40,9 @@ function getBeers(query, pageNum) {
                 let beerId = beers[i].id;
                 let brewery = beers[i].breweries[0];
 
+
+                // Images
+
                 //let image = beers[i].labels;
 
                 //if (typeof image !== 'undefined') {
@@ -51,15 +54,15 @@ function getBeers(query, pageNum) {
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
 
                 if (typeof style !== 'undefined') {
-                    $('.results').append(`${style.name}<br>`);
+                    $('.results').append(`<b>${style.name}</b><br>`);
                 }
 
                 if (typeof brewery !== 'undefined') {
-                    $('.results').append(`${brewery.name}<br>`);
+                    $('.results').append(`<b>${brewery.name}</b><br>`);
                 }
 
                 if (typeof abv !== 'undefined') {
-                    $('.results').append(`ABV: ${abv}%<br>`);
+                    $('.results').append(`<b>ABV: ${abv}%</b><br>`);
                 }
 
                 $('.results').append("<br>");

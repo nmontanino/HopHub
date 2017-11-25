@@ -1,5 +1,9 @@
 ﻿'use strict';
 
+function notEmpty(value) {
+    return typeof value !== 'undefined';
+}
+
 function getBeers(query, pageNum) {
     $.ajax({
         url: "/home/getbeer?beer=" + query + "&pageNum=" + pageNum,
@@ -11,11 +15,10 @@ function getBeers(query, pageNum) {
 
             let beers = response.data;
             let numResults = response.totalResults;
-
             let pages = response.numberOfPages;
             let currentPage = response.currentPage;
 
-            // Display 50 results per page
+            // Create pager if more than 50 results
             if (pages > 1) {
                 if (currentPage > 1) {
                     $('.pager').append(`<li class="previous"><a href="?beer=${query}&pageNum=${currentPage - 1}">&larr; Previous</a></li>`);
@@ -24,7 +27,7 @@ function getBeers(query, pageNum) {
             }
 
             // Display number of results and page number
-            if (typeof beers !== 'undefined') {
+            if (notEmpty(beers)) {
                 $('.results').append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`);
                 $('.results').append("<br>");
             } else {
@@ -41,36 +44,37 @@ function getBeers(query, pageNum) {
                 let beerId = beers[i].id;
                 let brewery = beers[i].breweries[0];
 
-                // Beer label images
+                // Use placeholder image if label not available
                 let image = beers[i].labels;
-                if (typeof image !== 'undefined') {
+                if (notEmpty(image)) {
                     $('.results').append(`<div class="pull-right"><img class="img-circle" src="${image.icon}"><div>`);
                 } else {
                     $('.results').append(`<div class="pull-right"><img class="thumbnail" src="/images/noun_3235_cc-gry2-lg.svg" height="64px"><div>`);
                 }
 
+                // Link to individual beer page
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
 
-                if (typeof style !== 'undefined') {
+                if (notEmpty(style)) {
                     $('.results').append(`<b>${style.name}</b><br>`);
                 }
 
-                if (typeof brewery !== 'undefined') {
+                if (notEmpty(brewery)) {
                     $('.results').append(`<b>${brewery.name}</b><br>`);
                 }
 
-                if (typeof abv !== 'undefined') {
+                if (notEmpty(abv)) {
                     $('.results').append(`<b>ABV: ${abv}%</b><br>`);
                 }
 
                 $('.results').append("<br>");
 
-                if (typeof description !== 'undefined') {
+                if (notEmpty(description)) {
                     $('.results').append(`${description}<br>`);
                     $('.results').append("<br>");
                 }
 
-                if (typeof style !== 'undefined') {
+                if (notEmpty(style)) {
                     $('.results').append(`Style Description: ${style.description}<br>`);
                 }
 
@@ -100,39 +104,39 @@ function singleBeer(beerId) {
             let breweryName = brewery.name;
             let website = brewery.website;
 
-            if (typeof image !== 'undefined') {
+            if (notEmpty(image)) {
                 $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
             } else {
-                $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="118px">`);
+                $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="128px">`);
             }
             
             $('.top').append(`<h4>${beer.name}</h4>`);
 
-            if (typeof style !== 'undefined') {
+            if (notEmpty(style)) {
                 $('.top').append(`<h4>${style.name}</h4>`);
             }
-            if (typeof breweryName !== 'undefined') {
+            if (notEmpty(breweryName)) {
                 $('.top').append(`<h4>${breweryName}</h4>`);
             }
-            if (typeof abv !== 'undefined') {
+            if (notEmpty(abv)) {
                 $('.top').append(`<h4>ABV: ${abv}%</h4>`);
             }
 
             $('.info').append(`<br>`);
 
-            if (typeof description !== 'undefined') {
+            if (notEmpty(description)) {
                 $('.info').append(`<p><b>Beer Description</b></p>`);
                 $('.info').append(`<p>${description}</p><br>`);
             }
-            if (typeof style !== 'undefined') {
+            if (notEmpty(style)) {
                 $('.info').append(`<p><b>Style Description</b></p>`);
                 $('.info').append(`<p>${style.description}</p><br>`);
             }
-            if (typeof breweryDesc !== 'undefined') {
+            if (notEmpty(breweryDesc)) {
                 $('.info').append(`<p><b>Brewery Description</b></p>`);
                 $('.info').append(`<p>${breweryDesc}</p>`);
             }
-            if (typeof website !== 'undefined') {
+            if (notEmpty(website)) {
                 $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
             }
 
@@ -152,7 +156,7 @@ $(document).ready(function () {
         else {
             return decodeURI(results[1]) || 0;
         }
-    }
+    };
     if ($('.results').length) {
         getBeers($.urlParam('beer'), $.urlParam('pageNum'));
     }

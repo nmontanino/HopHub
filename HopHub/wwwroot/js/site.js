@@ -1,8 +1,7 @@
 ﻿'use strict';
 
-function notEmpty(value) {
-    return typeof value !== 'undefined';
-}
+// Use to check if data exists in object
+const notEmpty = value => typeof value !== 'undefined';
 
 function getBeers(query, pageNum) {
     $.ajax({
@@ -10,13 +9,13 @@ function getBeers(query, pageNum) {
         success: function (response) {
             console.log(response);
 
-            $('.results').empty();
-            $('.pager').empty();
-
             let beers = response.data;
             let numResults = response.totalResults;
             let pages = response.numberOfPages;
             let currentPage = response.currentPage;
+
+            $('.results').empty();
+            $('.pager').empty();
 
             // Create pager if more than 50 results
             if (pages > 1) {
@@ -31,11 +30,10 @@ function getBeers(query, pageNum) {
                 $('.results').append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`);
                 $('.results').append("<br>");
             } else {
-                $('.results').append("<i>No search results.</i>"); 
+                $('.results').append("<i>No search results.</i>");
             }
 
-            let i = 0;
-            for (i; i < beers.length; i++) {
+            for (let i = 0; i < beers.length; i++) {
 
                 let name = beers[i].name;
                 let style = beers[i].style;
@@ -46,6 +44,7 @@ function getBeers(query, pageNum) {
 
                 // Use placeholder image if label not available
                 let image = beers[i].labels;
+
                 if (notEmpty(image)) {
                     $('.results').append(`<div class="pull-right"><img class="img-circle" src="${image.icon}"><div>`);
                 } else {
@@ -58,11 +57,9 @@ function getBeers(query, pageNum) {
                 if (notEmpty(style)) {
                     $('.results').append(`<b>${style.name}</b><br>`);
                 }
-
                 if (notEmpty(brewery)) {
                     $('.results').append(`<b>${brewery.name}</b><br>`);
                 }
-
                 if (notEmpty(abv)) {
                     $('.results').append(`<b>ABV: ${abv}%</b><br>`);
                 }
@@ -73,7 +70,6 @@ function getBeers(query, pageNum) {
                     $('.results').append(`${description}<br>`);
                     $('.results').append("<br>");
                 }
-
                 if (notEmpty(style)) {
                     $('.results').append(`Style Description: ${style.description}<br>`);
                 }
@@ -89,10 +85,6 @@ function singleBeer(beerId) {
         success: function (response) {
             console.log(response);
 
-            $('.info').empty();
-            $('.top').empty();
-            $('.media-right').empty();
-
             let beer = response.data;
             let abv = beer.abv;
             let description = beer.description;
@@ -103,6 +95,10 @@ function singleBeer(beerId) {
             let breweryDesc = brewery.description;
             let breweryName = brewery.name;
             let website = brewery.website;
+
+            $('.info').empty();
+            $('.top').empty();
+            $('.media-right').empty();
 
             if (notEmpty(image)) {
                 $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
@@ -145,9 +141,7 @@ function singleBeer(beerId) {
         }
     });
 }
-
 $(document).ready(function () {
-
     $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
         if (results === null) {

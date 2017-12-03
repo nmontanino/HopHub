@@ -1,4 +1,11 @@
 ﻿@model Beer
+@section DocumentCSS{ 
+    <style>
+        .rating > label {
+            font-size: 125%;
+        }
+    </style>
+}
 @{
     ViewData["Title"] = "Beer Information";
 }
@@ -27,7 +34,7 @@
 
 @if (Model.AvgRating > 0)
 {
-    <h4 style="color:whitesmoke">(@Model.Entries.Count) User Reviews</h4>
+    <h4 class="review-header">(@Model.Entries.Count) User Reviews</h4>
     @foreach (var entry in Model.Entries)
     {
         <div class="panel panel-default">
@@ -43,12 +50,12 @@
                             if (x <= entry.Rating)
                             {
                                 <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
-                                <label class="checked" for="@entry.ID+@x" style="font-size: 125%;"></label>
+                                <label class="checked" for="@entry.ID+@x"></label>
                             }
                             else
                             {
                                 <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
-                                <label for="@entry.ID+@x" style="font-size: 125%;"></label>
+                                <label for="@entry.ID+@x"></label>
                             }
                         }
                     </div>

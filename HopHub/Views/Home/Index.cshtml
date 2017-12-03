@@ -1,4 +1,14 @@
 ﻿@model IList<Beer>
+@section DocumentCSS {
+<style>
+    .rating > label {
+        font-size: 110%;
+    }
+    .thumbnail {
+        opacity:0.9;
+    }
+</style>
+}
 @{
     ViewData["Title"] = "HopHub";
 }
@@ -22,12 +32,12 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="thumbnail" style="opacity:0.9;">
+        <div class="thumbnail">
             <br />
             <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo" />
             <div class="caption">
-                <h2 id="mainLogo">HopHub</h2>
-                <p id="mainLogo">Your Craft Beer Directory</p>
+                <h2 class="main-logo">HopHub</h2>
+                <p class="main-logo">Your Craft Beer Directory</p>
                 <form asp-controller="Home" asp-action="Search" method="get">
                     <div class="input-group">
                         <input type="search" class="form-control" name="beer" placeholder="Beer or Brewery Name">
@@ -58,12 +68,12 @@
                                     if (x <= review.Rating)
                                     {
                                         <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
-                                        <label class="checked" for="@review.ID+@x" style="font-size: 110%;"></label>
+                                        <label class="checked" for="@review.ID+@x"></label>
                                     }
                                     else
                                     {
                                         <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
-                                        <label for="@review.ID+@x" style="font-size: 110%;"></label>
+                                        <label for="@review.ID+@x"></label>
                                     }
                                 }
                             </div>

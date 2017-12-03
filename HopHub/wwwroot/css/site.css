@@ -35,11 +35,10 @@
 }
 
 /* Logo Image */
-#mainLogo {
+.main-logo {
     text-align:center;
     padding-top:0px;
 }
-
 
 /* Star ratings */
 .rating {
@@ -86,3 +85,8 @@ body {
 div.panel.panel-default{
     opacity:0.95;
 }
+
+.review-header {
+    color: whitesmoke
+}
+

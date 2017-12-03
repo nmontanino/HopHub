@@ -16,11 +16,12 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <!-- These scripts were moved up from the body in order to process ajax requests before pageload-->
+    <!-- These scripts were moved up from the body -->
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     <!---->
+        @RenderSection("HeadScripts", required: false)
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -88,7 +89,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

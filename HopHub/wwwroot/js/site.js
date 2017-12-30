@@ -31,26 +31,22 @@ function singleBeer(beerId) {
             let breweryName = brewery.name;
             let website = brewery.website;
 
-            $('.info').empty();
-            $('.top').empty();
-            $('.media-right').empty();
-
             if (notEmpty(image)) {
-                $('.media-right').wrapInner(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
+                $('.media-right').html(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
             } else {
-                $('.media-right').wrapInner(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="128px">`);
+                $('.media-right').html(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="128px">`);
             }
             
-            $('.top').append(`<h4>${beer.name}</h4>`);
+            $('.media-body').append(`<h4>${beer.name}</h4>`);
 
             if (notEmpty(style)) {
-                $('.top').append(`<h4>${style.name}</h4>`);
+                $('.media-body').append(`<h4>${style.name}</h4>`);
             }
             if (notEmpty(breweryName)) {
-                $('.top').append(`<h4>${breweryName}</h4>`);
+                $('.media-body').append(`<h4>${breweryName}</h4>`);
             }
             if (notEmpty(abv)) {
-                $('.top').append(`<h4>ABV: ${abv}%</h4>`);
+                $('.media-body').append(`<h4>ABV: ${abv}%</h4>`);
             }
 
             $('.info').append(`<br>`);
@@ -76,6 +72,7 @@ function singleBeer(beerId) {
         }
     });
 }
+
 $(document).ready(function () {
     if ($('.info').length) {
         singleBeer($.urlParam('id'));

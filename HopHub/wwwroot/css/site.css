@@ -36,8 +36,8 @@
 
 /* Logo Image */
 .main-logo {
-    text-align:center;
-    padding-top:0px;
+    text-align: center;
+    padding-top: 0;
 }
 
 /* Star ratings */
@@ -87,6 +87,6 @@ div.panel.panel-default{
 }
 
 .review-header {
-    color: whitesmoke
+    color: whitesmoke;
 }
 

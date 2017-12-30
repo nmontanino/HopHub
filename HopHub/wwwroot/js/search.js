@@ -11,9 +11,6 @@ function getBeers(query, pageNum) {
             let pages = response.numberOfPages;
             let currentPage = response.currentPage;
 
-            $('.results').empty();
-            $('.pager').empty();
-
             // Create pager if more than 50 results
             if (pages > 1) {
                 if (currentPage > 1) {
@@ -43,7 +40,7 @@ function getBeers(query, pageNum) {
                 let image = beers[i].labels;
 
                 if (notEmpty(image)) {
-                    $('.results').append(`<div class="pull-right"><img class="img-circle" src="${image.icon}"><div>`);
+                    $('.results').append(`<div class="pull-right"><img src="${image.icon}"><div>`);
                 } else {
                     $('.results').append(`<div class="pull-right"><img class="thumbnail" src="/images/noun_3235_cc-gry2-lg.svg" height="64px"><div>`);
                 }

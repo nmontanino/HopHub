@@ -1,15 +1,16 @@
-﻿'use strict';
+﻿"use strict";
 
 // Use to check if data exists in object
-const notEmpty = value => typeof value !== 'undefined';
+const notEmpty = value => typeof value !== "undefined";
 
 // Get parameters from url
 $.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    var results = new RegExp("[?&]" + name + "=([^&#]*)").exec(
+        window.location.href
+    );
     if (results === null) {
         return null;
-    }
-    else {
+    } else {
         return decodeURI(results[1]) || 0;
     }
 };
@@ -32,49 +33,63 @@ function singleBeer(beerId) {
             let website = brewery.website;
 
             if (notEmpty(image)) {
-                $('.media-right').html(`<a href="${image.large}"><img class="media-object" src="${image.medium}" height="128px"></a>`);
+                $(".media-right").html(
+                    `<a href="${image.large}"><img src="${image.medium}"></a>`
+                );
             } else {
-                $('.media-right').html(`<img class="media-object" src="/images/noun_3235_cc-gry2-lg.svg" height="128px">`);
+                $(".media-right").html(`<img src="/images/noun_3235_cc-gry2-lg.svg">`);
             }
-            
-            $('.media-body').append(`<h4>${beer.name}</h4>`);
+
+            $("img").addClass("media-object");
+            $(".media-object").css("height", "128px");
+
+            $(".media-body").append(`<h4>${beer.name}</h4>`);
 
             if (notEmpty(style)) {
-                $('.media-body').append(`<h4>${style.name}</h4>`);
+                $(".media-body").append(`<h4>${style.name}</h4>`);
             }
             if (notEmpty(breweryName)) {
-                $('.media-body').append(`<h4>${breweryName}</h4>`);
+                $(".media-body").append(`<h4>${breweryName}</h4>`);
             }
             if (notEmpty(abv)) {
-                $('.media-body').append(`<h4>ABV: ${abv}%</h4>`);
+                $(".media-body").append(`<h4>ABV: ${abv}%</h4>`);
             }
 
-            $('.info').append(`<br>`);
+            $(".info").append(`<br>`);
 
             if (notEmpty(description)) {
-                $('.info').append(`<p><b>Beer Description</b></p>`);
-                $('.info').append(`<p>${description}</p><br>`);
+                $(".info")
+                    .append(`<p><b>Beer Description</b></p>`)
+                    .append(`<p>${description}</p><br>`);
             }
             if (notEmpty(style)) {
-                $('.info').append(`<p><b>Style Description</b></p>`);
-                $('.info').append(`<p>${style.description}</p><br>`);
+                $(".info")
+                    .append(`<p><b>Style Description</b></p>`)
+                    .append(`<p>${style.description}</p><br>`);
             }
             if (notEmpty(breweryDesc)) {
-                $('.info').append(`<p><b>Brewery Description</b></p>`);
-                $('.info').append(`<p>${breweryDesc}</p>`);
+                $(".info")
+                    .append(`<p><b>Brewery Description</b></p>`)
+                    .append(`<p>${breweryDesc}</p>`);
             }
             if (notEmpty(website)) {
-                $('.info').append(`<p><a href="${website}">Brewery Website</a></p>`);
+                $(".info").append(`<p><a href="${website}">Brewery Website</a></p>`);
+                $(".info a").attr("target", "_blank");
             }
 
-            $('.info').append(`<br>`);
-            $('.info').append(`<a href="/Entry/Add?id=${beer.id}&name=${beer.name}" role="button" class="btn btn-success">Add ${beer.name} To Your Log</a>`);
+            $(".info")
+                .append(`<br>`)
+                .append(
+                `<a href="/Entry/Add?id=${beer.id}&name=${beer.name}" role="button">Add ${beer.name} To Your Log</a>`
+                );
+
+            $("a[role='button']").addClass("btn btn-success");
         }
     });
 }
 
 $(document).ready(function () {
-    if ($('.info').length) {
-        singleBeer($.urlParam('id'));
+    if ($(".info").length) {
+        singleBeer($.urlParam("id"));
     }
 });

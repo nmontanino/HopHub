@@ -50,6 +50,7 @@ namespace HopHub.Controllers
                 .Where(e => e.Review != null)
                 .OrderByDescending(e => e.TimeStamp)
                 .Include(e => e.Beer)
+                .Include(e => e.ApplicationUser)
                 .Take(3)
                 .ToList();
 

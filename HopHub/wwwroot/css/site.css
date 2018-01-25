@@ -74,12 +74,22 @@
 }
 
 /* Background image */
-body {
+body, html {
     height: 100%;
-    margin: 0px;
-    background: url(../images/caps_dark4.jpg) no-repeat center center;
+    margin: 0;
+    padding-bottom: 0;
+    /*background: url(../images/caps_dark4.jpg) no-repeat center center;
     background-size: cover;
+    background-attachment: fixed;*/
+}
+
+.main-img {
+    background-image: url("../images/caps_dark4.jpg");
+    height: 100%;
     background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 div.panel.panel-default{
@@ -89,4 +99,16 @@ div.panel.panel-default{
 .review-header {
     color: whitesmoke;
 }
+
+#highest-rated {
+    min-height: 100%;
+    background-color: snow;
+}
+
+
+#recent-reviews {
+    min-height: 100%;
+    background-color: black;
+}
+
 

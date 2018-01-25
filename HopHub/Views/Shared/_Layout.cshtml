@@ -8,7 +8,12 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/style.css" />
+        @*<link rel="stylesheet" href="~/css/style.css" />*@
+    <!-- These scripts were moved up from the body -->
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    <!---->
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,11 +21,6 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <!-- These scripts were moved up from the body -->
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    <!---->
         @RenderSection("HeadScripts", required: false)
         @RenderSection("DocumentCSS", required: false)
 </head>
@@ -41,27 +41,37 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Entry" asp-action="Index">Entries</a></li>
                 </ul>
-                <form asp-controller="Home" asp-action="Search" method="get" class="navbar-form navbar-left" role="search">
-                    <div class="input-group">
-                        <input type="search" class="form-control beer" name="beer" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
+                @if (ViewData["Title"].ToString() != "Home")
+                {
+                    // Does not display nav searchbar on main page
+                    <form asp-controller="Home" asp-action="Search" method="get" class="navbar-form navbar-left" role="search">
+                        <div class="input-group">
+                            <input type="search" class="form-control beer" name="beer" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                }
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
+    @if (ViewData["Title"].ToString() == "Home")
+    {   
+        @RenderBody();
+    }
+    else
+    {
     <div class="container body-content">
         <br />
         <br />
         @RenderBody()
         <br />
         <footer>
-            <p class="pull-left" style="color:whitesmoke">&copy; 2017 - HopHub</p>
+            <p class="pull-left" style="color:whitesmoke">&copy; 2018 - Nico Montanino</p>
             <div class="pull-right">
                 <ul class="list-inline">
                     <li><a href="#">Privacy</a></li>
@@ -72,7 +82,9 @@
             </div>
         </footer>
     </div>
+    }
     <environment include="Development">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <!-- These scripts were moved up up to the header -->
     </environment>
     <environment exclude="Development">

@@ -9,81 +9,95 @@
     }
 </style>
 }
-@{
-    ViewData["Title"] = "HopHub";
-}
-<div class="row">
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Highest Rated Beers</h4>
-            </div>
-            <div class="list-group">
-                @foreach (var beer in Model)
-                {
-                    <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
-                        <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
-                        <h5 class="list-group-item-heading"><b>@beer.Name</b></h5>
-                        <p class="list-group-item-text">Average Rating: @String.Format("{0:0.#}", beer.AvgRating) out of 5</p>
-                        <small class="list-group-item-text">@beer.Entries.Count() Log Entries</small>
-                    </a>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="thumbnail">
-            <br />
-            <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo" />
-            <div class="caption">
-                <h2 class="main-logo">HopHub</h2>
-                <p class="main-logo">Your Craft Beer Directory</p>
-                <form asp-controller="Home" asp-action="Search" method="get">
-                    <div class="input-group">
-                        <input type="search" class="form-control" name="beer" placeholder="Beer or Brewery Name">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Recent Reviews</h4>
-            </div>
-            <div class="list-group">
-                @foreach (var review in ViewBag.recent)
-                {
-                    <a href="/Beer?id=@review.Beer.ReferenceID" class="list-group-item">
-                        <!-- Rating -->
-                        <div class="pull-right">
-                            <div class="rating">
-                                @for (int x = 5; x >= 1; x--)
-                                {
-                                    if (x <= review.Rating)
-                                    {
-                                        <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
-                                        <label class="checked" for="@review.ID+@x"></label>
-                                    }
-                                    else
-                                    {
-                                        <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
-                                        <label for="@review.ID+@x"></label>
-                                    }
-                                }
+<div class="main-img">
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="thumbnail">
+                    <br />
+                    <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo" />
+                    <div class="caption">
+                        <h2 class="main-logo">HopHub</h2>
+                        <p class="main-logo">Your Craft Beer Directory</p>
+                        <form asp-controller="Home" asp-action="Search" method="get">
+                            <div class="input-group">
+                                <input type="search" class="form-control" name="beer" placeholder="Beer or Brewery Name">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
                             </div>
-                        </div>
-                        <!-- Rating -->
-                        <h4 class="list-group-item-heading">@review.Beer.Name</h4>
-                        <p class="list-group-item-text">@review.Review</p>
-                        <small class="list-group-item-text">Made by @review.ApplicationUser.UserName on @review.TimeStamp</small>
-                    </a>
-                }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+    
+<div id="highest-rated">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Highest Rated Beers</h4>
+                    </div>
+                    <div class="list-group">
+                        @foreach (var beer in Model)
+                        {
+                            <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
+                                <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
+                                <h5 class="list-group-item-heading"><b>@beer.Name</b></h5>
+                                <p class="list-group-item-text">Average Rating: @String.Format("{0:0.#}", beer.AvgRating) out of 5</p>
+                                <small class="list-group-item-text">@beer.Entries.Count() Log Entries</small>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="recent-reviews">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Recent Reviews</h4>
+                    </div>
+                    <div class="list-group">
+                        @foreach (var review in ViewBag.recent)
+                        {
+                            <a href="/Beer?id=@review.Beer.ReferenceID" class="list-group-item">
+                                <!-- Rating -->
+                                <div class="pull-right">
+                                    <div class="rating">
+                                        @for (int x = 5; x >= 1; x--)
+                                        {
+                                            if (x <= review.Rating)
+                                            {
+                                                <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
+                                                <label class="checked" for="@review.ID+@x"></label>
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" id="@review.ID+@x" name="rating" value="@review.ID+@x" />
+                                                <label for="@review.ID+@x"></label>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <!-- Rating -->
+                                <h4 class="list-group-item-heading">@review.Beer.Name</h4>
+                                <p class="list-group-item-text">@review.Review</p>
+                                <small class="list-group-item-text">Made by @review.ApplicationUser.UserName on @review.TimeStamp</small>
+                            </a>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>

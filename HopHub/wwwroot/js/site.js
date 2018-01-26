@@ -92,4 +92,6 @@ $(document).ready(function () {
     if ($(".info").length) {
         singleBeer($.urlParam("id"));
     }
+    $(".logo-box").hide().fadeIn(1600);
 });
+

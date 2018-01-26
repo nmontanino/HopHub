@@ -4,38 +4,35 @@
     .rating > label {
         font-size: 110%;
     }
-    .thumbnail {
-        opacity:0.9;
-    }
 </style>
 }
+<!-- Title and Search Bar -->
 <div class="main-img">
     <div class="container body-content">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div class="thumbnail">
-                    <br />
-                    <img src="~/images/noun_3235_cc-gry2-lg.svg" alt="HopHub logo" />
-                    <div class="caption">
-                        <h2 class="main-logo">HopHub</h2>
-                        <p class="main-logo">Your Craft Beer Directory</p>
-                        <form asp-controller="Home" asp-action="Search" method="get">
-                            <div class="input-group">
-                                <input type="search" class="form-control" name="beer" placeholder="Beer or Brewery Name">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-success" type="submit">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
+            <div class="col-md-6 centered">
+                <div class="logo-box">
+                    <div class="main-logo">
+                        <h1>HopHub</h1>
+                        <hr />
+                        <h3>Your Craft Beer Journal</h3>
                     </div>
+                    <form asp-controller="Home" asp-action="Search" method="get">
+                        <div class="input-group">
+                            <input type="search" class="form-control" name="beer" placeholder="Search beer or brewery...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
      </div>
 </div>
-    
+<!-- Highest Rated Beers -->
 <div id="highest-rated">
     <div class="container">
         <div class="row">
@@ -60,6 +57,7 @@
         </div>
     </div>
 </div>
+<!-- Recent User Reviews -->
 <div id="recent-reviews">
     <div class="container">
         <div class="row">

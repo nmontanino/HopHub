@@ -37,8 +37,6 @@ namespace HopHub.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Title"] = "Home";
-
             // Get list of beer ordered by highest average rating
             IList<Beer> topRated = context
                 .Beers
@@ -54,7 +52,7 @@ namespace HopHub.Controllers
                 .OrderByDescending(e => e.TimeStamp)
                 .Include(e => e.Beer)
                 .Include(e => e.ApplicationUser)
-                .Take(3)
+                .Take(5)
                 .ToList();
 
             ViewBag.recent = recentReviews;

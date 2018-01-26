@@ -68,13 +68,10 @@
     /*color: #FABE28 !important;*/
 }
 
-body, html {
+body {
     height: 100%;
     margin: 0;
-    padding-bottom: 0;
-    /*background: url(../images/caps_dark4.jpg) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;*/
+    background-color: #f8f5f0;
 }
 
 /* Background image */

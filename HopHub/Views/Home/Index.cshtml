@@ -50,11 +50,17 @@
                     <div class="list-group">
                         @foreach (var beer in Model)
                         {
+                            var percentageRating = beer.AvgRating / 5 * 100;
+                            
                             <a href="/Beer?id=@beer.ReferenceID" class="list-group-item">
-                                <span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>
-                                <h5 class="list-group-item-heading"><b>@beer.Name</b></h5>
-                                <p class="list-group-item-text">Average Rating: @String.Format("{0:0.#}", beer.AvgRating) out of 5</p>
-                                <small class="list-group-item-text">@beer.Entries.Count() Log Entries</small>
+                                <div class="star-ratings pull-right">
+                                    <div class="star-ratings-top" style="width: @percentageRating%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                    <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                </div>
+                                @*<span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>*@
+                                <h4 class="list-group-item-heading"><b>@beer.Name</b></h4>
+                                <p class="list-group-item-text">@String.Format("{0:0.#}", beer.AvgRating) out of 5</p>
+                                <p class="list-group-item-text">@beer.Entries.Count() Log Entries</p>
                             </a>
                         }
                 </div>

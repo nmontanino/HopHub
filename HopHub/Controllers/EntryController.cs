@@ -1,5 +1,6 @@
 ﻿using HopHub.Data;
 using HopHub.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,8 @@ namespace HopHub.Controllers
                 // Get all entries associated with the current user
                 string userID = _userManager.GetUserId(HttpContext.User);
 
-                IList<Entry> entries = context.Entries
+                IList<Entry> entries = context
+                    .Entries
                     .Include(item => item.Beer)
                     .Where(e => e.ApplicationUserID == userID)
                     .ToList();
@@ -59,7 +61,6 @@ namespace HopHub.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 // If beer doesnt exist already add to database
                 bool exists = context.Beers.Any(b => b.ReferenceID == addEntryVM.BeerID);
 
@@ -76,9 +77,8 @@ namespace HopHub.Controllers
                 }
                 
                 // Get beer object by reference ID
-                Beer existingBeer = context.Beers
-                    .Single(b => b.ReferenceID == addEntryVM.BeerID);
-                
+                Beer existingBeer = context.Beers.Single(b => b.ReferenceID == addEntryVM.BeerID);
+
                 // Create new Entry
                 Entry userEntry = new Entry
                 {
@@ -111,6 +111,37 @@ namespace HopHub.Controllers
                 return Redirect("/Entry");
             }
             return View(addEntryVM);
+        }
+
+        public IActionResult Edit(int entryID)
+        {
+            // TODO: Check if the user has access (is the creator) of the object to be edited
+
+            // Retrieve entry from database by ID
+            Entry entryEdit = context.Entries.Single(e => e.ID == entryID);
+            
+            return View(EditEntryViewModel.EditEntry(entryEdit));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditEntryViewModel editEntryVM)
+        {
+            if (ModelState.IsValid)
+            {
+                // Update entry details in database
+                Entry entryUpdate = context.Entries.Single(e => e.ID == editEntryVM.ID);
+
+                entryUpdate.Rating = editEntryVM.Rating;
+                entryUpdate.UserComments = editEntryVM.UserComments;
+                entryUpdate.Review = editEntryVM.Review;
+                entryUpdate.Location = editEntryVM.Location;
+
+                context.Entries.Update(entryUpdate);
+                context.SaveChanges();
+
+                return Redirect("/Entry");
+            }
+            return View(editEntryVM);
         }
     }
 }

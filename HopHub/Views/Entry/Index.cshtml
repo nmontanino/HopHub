@@ -18,7 +18,7 @@
             }
             else
             {
-                <div class="list-group">
+                @*<div class="list-group">
                     @foreach (var entry in Model.Reverse())
                     {
                         <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
@@ -58,6 +58,47 @@
                             <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
                         </a>
                     }
+                </div>*@
+                <div class="panel-body">
+                    @foreach (var entry in Model.Reverse())
+                    {
+                        <!-- Rating -->
+                        <div class="pull-right">
+                            <div class="rating">
+                                @for (int x = 5; x >= 1; x--)
+                                {
+                                    if (x <= entry.Rating)
+                                    {
+                                        <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                            <label class="checked" for="@entry.ID+@x"></label>
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
+                                            <label for="@entry.ID+@x"></label>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!-- Rating -->
+                        <h4><a href="/Beer?id=@entry.Beer.ReferenceID">@entry.Beer.Name</a></h4>
+                        <p><b>Rating: @entry.Rating out of 5 (Average Rating: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></p>
+                        @if (entry.Review != null)
+                        {
+                            <p>Review: @entry.Review</p>
+                        }
+                        @if (entry.UserComments != null)
+                        {
+                            <p>Comments: @entry.UserComments</p>
+                        }
+                        @if (entry.Location != null)
+                        {
+                            <p>Location: @entry.Location</p>
+                        }
+                        <h4><a asp-controller="Entry" asp-action="Edit" asp-route-entryID="@entry.ID" title="Edit Entry" class="pull-right"><span class="glyphicon glyphicon-edit"></span></a></h4>
+                        <small>Added on: @entry.TimeStamp</small>
+                        <hr />
+                    }
                 </div>
             }
         </div>
@@ -68,6 +109,12 @@
             <div class="panel-heading">
                 <h4 class="panel-title">Your top rated beers</h4>
             </div>
+            @if (Model.Count() == 0)
+            {
+                <div class="panel-body">
+                    <p>You have not rated any beers.</p>
+                </div>
+            }
             <div class="list-group">
                 @{ 
                     int i = 0;

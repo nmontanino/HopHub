@@ -14,7 +14,6 @@ namespace HopHub.Models
             EditEntryViewModel edit = new EditEntryViewModel
             {
                 ID = entry.ID,
-                BeerID = entry.Beer.ReferenceID,
                 BeerName = entry.Beer.Name,
                 Rating = entry.Rating,
                 Review = entry.Review,

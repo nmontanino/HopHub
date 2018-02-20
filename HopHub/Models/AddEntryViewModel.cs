@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 namespace HopHub.Models
 {
     public class AddEntryViewModel
-    {   
+    {
         public string BeerID { get; set; }
         public string BeerName { get; set; }
 

@@ -13,7 +13,7 @@ namespace HopHub.Controllers
     public class EntryController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
 
         public EntryController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
@@ -76,14 +76,21 @@ namespace HopHub.Controllers
                     context.SaveChanges();
                 }
                 
-                // Get beer object by reference ID
-                Beer existingBeer = context.Beers.Single(b => b.ReferenceID == addEntryVM.BeerID);
+                // Get Beer object by reference ID
+                Beer existingBeer = context
+                    .Beers
+                    .Single(b => b.ReferenceID == addEntryVM.BeerID);
 
-                // Create new Entry
+                // Get ApplicationUser by ID of current logged in user
+                ApplicationUser user = context
+                    .Users
+                    .Single(u => u.Id == _userManager.GetUserId(HttpContext.User));
+
+                // Create new Entry object
                 Entry userEntry = new Entry
                 {
-                    ApplicationUserID = _userManager.GetUserId(HttpContext.User),
-                    BeerID = existingBeer.ID,
+                    ApplicationUser = user, 
+                    Beer = existingBeer,
                     Rating = addEntryVM.Rating,
                     Review = addEntryVM.Review,
                     UserComments = addEntryVM.UserComments,
@@ -112,17 +119,24 @@ namespace HopHub.Controllers
             }
             return View(addEntryVM);
         }
-
+        
+        // GET: /Entry/Edit/
         public IActionResult Edit(int entryID)
         {
-            // TODO: Check if the user has access (is the creator) of the object to be edited
-
-            // Retrieve entry from database by ID
-            Entry entryEdit = context.Entries.Single(e => e.ID == entryID);
+            // TODO: Must check if the user has access (is the creator) of the object to be edited
             
-            return View(EditEntryViewModel.EditEntry(entryEdit));
-        }
+            // Retrieve entry from database by ID
+            Entry entryEdit = context
+                .Entries
+                .Include(e => e.Beer)
+                .Single(e => e.ID == entryID);
 
+            EditEntryViewModel model = EditEntryViewModel.EditEntry(entryEdit);
+
+            return View(model);
+        }
+        
+        // POST: /Entry/Add/
         [HttpPost]
         public IActionResult Edit(EditEntryViewModel editEntryVM)
         {

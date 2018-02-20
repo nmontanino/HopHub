@@ -1,0 +1,43 @@
+﻿@model EditEntryViewModel
+@{
+    ViewData["Title"] = "Edit Entry";
+}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5>Edit @Model.BeerName Entry (ID = @Model.ID)</h5>
+            </div>
+            <div class="panel panel-body">
+                <form asp-controller="Entry" asp-action="Edit" method="post">
+                    <div class="form-group">
+                        <label asp-for="Rating"></label>
+                        <select class="form-control" asp-for="Rating">
+                            <option value="1">★</option>
+                            <option value="2">★★</option>
+                            <option value="3">★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="5">★★★★★</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Review"></label>
+                        <textarea class="form-control" asp-for="Review">@Model.Review</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserComments"></label>
+                        <textarea class="form-control" asp-for="UserComments">@Model.UserComments</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Location"></label>
+                        <input class="form-control" asp-for="Location" />
+                    </div>
+                    @*<input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
+                    <input asp-for="BeerName" type="hidden" value="@Model.BeerName" />*@
+                    <input asp-for="ID" type="hidden" value="@Model.ID" />
+                    <input class="btn btn-success" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

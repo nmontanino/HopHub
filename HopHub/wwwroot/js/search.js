@@ -40,9 +40,9 @@ function getBeers(query, pageNum) {
                 let brewery = beers[i].breweries[0];
                 let image = beers[i].labels;
 
+                
+                //Checking for undefined values using ternary operators inside template strings. 
                 /*
-                Checking for undefined values using ternary operators inside template strings. 
-
                 let markup = `
                     <div class="well">
                         ${image ? `<div class="pull-right"><img src="${image.icon}"></div>` : `<div class="pull-right"><img class="thumbnail" src="/images/noun_3235_cc-gry2-lg.svg" height="64px"></div>`}
@@ -50,6 +50,8 @@ function getBeers(query, pageNum) {
                         ${style ? `<b>${style.name}</b><br>` : ''}
                         ${brewery ? `<b>${brewery.name}</b><br>` : ''}
                         ${abv ? `<b>ABV: ${abv}%</b><br>` : ''}
+                        <br>
+                        ${description || ''}
                     </div>
                 `;
                 $('.results').append(markup);

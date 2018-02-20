@@ -180,9 +180,9 @@ div.panel.panel-default {
 .star-ratings {
     unicode-bidi: bidi-override;
     color: #DDD;
-    font-size: 24px;
-    height: 24px;
-    width: 100px;
+    font-size: 22px;
+    height: 22px;
+    /*width: 100px;*/
     margin: 0 auto;
     position: relative;
     padding: 0;
@@ -204,5 +204,13 @@ div.panel.panel-default {
     padding: 0;
     display: block;
     z-index: 0;
+}
+
+.list-group-item:first-child {
+    border-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-radius: 0;
 }
 

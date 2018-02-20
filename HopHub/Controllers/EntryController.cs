@@ -153,6 +153,22 @@ namespace HopHub.Controllers
                 context.Entries.Update(entryUpdate);
                 context.SaveChanges();
 
+                // Update average rating for the beer
+                Beer existingBeer = context
+                    .Beers
+                    .Single(b => b.ReferenceID == editEntryVM.BeerID);
+
+                existingBeer.AvgRating = (double)context
+                    .Entries
+                    .Where(e => e.BeerID == existingBeer.ID)
+                    .Sum(e => e.Rating) / context
+                    .Entries
+                    .Where(e => e.BeerID == existingBeer.ID)
+                    .Count();
+
+                context.Beers.Update(existingBeer);
+                context.SaveChanges();
+
                 return Redirect("/Entry");
             }
             return View(editEntryVM);

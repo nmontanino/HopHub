@@ -6,7 +6,7 @@
     <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5>Edit @Model.BeerName Entry (ID = @Model.ID)</h5>
+                <h5>Edit entry for @Model.BeerName</h5>
             </div>
             <div class="panel panel-body">
                 <form asp-controller="Entry" asp-action="Edit" method="post">
@@ -32,8 +32,7 @@
                         <label asp-for="Location"></label>
                         <input class="form-control" asp-for="Location" />
                     </div>
-                    @*<input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
-                    <input asp-for="BeerName" type="hidden" value="@Model.BeerName" />*@
+                    <input asp-for="BeerID" type="hidden" value="@Model.BeerID" />
                     <input asp-for="ID" type="hidden" value="@Model.ID" />
                     <input class="btn btn-success" type="submit" />
                 </form>

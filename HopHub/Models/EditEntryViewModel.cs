@@ -15,6 +15,7 @@ namespace HopHub.Models
             {
                 ID = entry.ID,
                 BeerName = entry.Beer.Name,
+                BeerID = entry.Beer.ReferenceID,
                 Rating = entry.Rating,
                 Review = entry.Review,
                 UserComments = entry.UserComments,

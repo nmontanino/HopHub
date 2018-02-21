@@ -12,19 +12,19 @@ namespace HopHub.Controllers
 {
     public class BeerController : Controller
     {
-        private ApplicationDbContext context;
-        public IConfiguration Configuration { get; set; }
+        private readonly ApplicationDbContext context;
+        private readonly IConfiguration configuration;
 
         public BeerController(ApplicationDbContext dbContext, IConfiguration config)
         {
             context = dbContext;
-            Configuration = config;
+            configuration = config;
         }
 
         // Get beer by ID
         public object SingleBeer(string id)
         {
-            string key = Configuration["APIKey"];
+            string key = configuration["APIKey"];
             string uri = $"https://api.brewerydb.com/v2/beer/{id}?withBreweries=Y&key={key}";
 
             HttpResponse<string> singleBeer = Unirest.get(uri).asJson<string>();

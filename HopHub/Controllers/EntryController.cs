@@ -136,7 +136,7 @@ namespace HopHub.Controllers
             return View(model);
         }
         
-        // POST: /Entry/Add/
+        // POST: /Entry/Edit/
         [HttpPost]
         public IActionResult Edit(EditEntryViewModel editEntryVM)
         {

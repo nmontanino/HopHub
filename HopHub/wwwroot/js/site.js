@@ -37,7 +37,7 @@ function singleBeer(beerId) {
                     `<a href="${image.large}"><img src="${image.medium}"></a>`
                 );
             } else {
-                $(".media-right").html(`<img src="/images/noun_3235_cc-gry2-lg.svg">`);
+                $(".media-right").html(`<img src="/images/default_logo_gray.svg">`);
             }
 
             $("img").addClass("media-object");

@@ -12,13 +12,13 @@ namespace HopHub.Controllers
 {
     public class EntryController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext context;
 
         public EntryController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             context = dbContext;
-            _userManager = userManager;
+            this.userManager = userManager;
         }
 
         // GET: /Entry/
@@ -27,10 +27,9 @@ namespace HopHub.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 // Get all entries associated with the current user
-                string userID = _userManager.GetUserId(HttpContext.User);
+                string userID = userManager.GetUserId(HttpContext.User);
 
-                IList<Entry> entries = context
-                    .Entries
+                IList<Entry> entries = context.Entries
                     .Include(item => item.Beer)
                     .Where(e => e.ApplicationUserID == userID)
                     .ToList();
@@ -77,14 +76,12 @@ namespace HopHub.Controllers
                 }
                 
                 // Get Beer object by reference ID
-                Beer existingBeer = context
-                    .Beers
+                Beer existingBeer = context.Beers
                     .Single(b => b.ReferenceID == addEntryVM.BeerID);
 
                 // Get ApplicationUser by ID of current logged in user
-                ApplicationUser user = context
-                    .Users
-                    .Single(u => u.Id == _userManager.GetUserId(HttpContext.User));
+                ApplicationUser user = context.Users
+                    .Single(u => u.Id == userManager.GetUserId(HttpContext.User));
 
                 // Create new Entry object
                 Entry userEntry = new Entry
@@ -102,14 +99,8 @@ namespace HopHub.Controllers
                 context.Entries.Add(userEntry);
                 context.SaveChanges();
 
-                // Calculates the average rating for the beer and updates Beers table
-                existingBeer.AvgRating = (double)context
-                    .Entries
-                    .Where(e => e.BeerID == existingBeer.ID)
-                    .Sum(e => e.Rating) / context
-                    .Entries
-                    .Where(e => e.BeerID == existingBeer.ID)
-                    .Count();
+                // Calculate the average rating for the beer
+                SetAverageRating(existingBeer);
 
                 context.Beers.Update(existingBeer);
                 context.SaveChanges();
@@ -124,13 +115,12 @@ namespace HopHub.Controllers
         public IActionResult Edit(int entryID)
         {
             //Retrieve entry from database by ID
-            Entry entryEdit = context
-                .Entries
+            Entry entryEdit = context.Entries
                 .Include(e => e.Beer)
                 .Single(e => e.ID == entryID);
 
             string userIdOfEntry = entryEdit.ApplicationUserID;
-            string currentUserId = _userManager.GetUserId(HttpContext.User);
+            string currentUserId = userManager.GetUserId(HttpContext.User);
 
             // Check if the user has access (is the creator) of the object to be edited
             if (User.Identity.IsAuthenticated && userIdOfEntry == currentUserId)
@@ -160,17 +150,10 @@ namespace HopHub.Controllers
                 context.SaveChanges();
 
                 // Update average rating for the beer
-                Beer existingBeer = context
-                    .Beers
+                Beer existingBeer = context.Beers
                     .Single(b => b.ReferenceID == editEntryVM.BeerID);
 
-                existingBeer.AvgRating = (double)context
-                    .Entries
-                    .Where(e => e.BeerID == existingBeer.ID)
-                    .Sum(e => e.Rating) / context
-                    .Entries
-                    .Where(e => e.BeerID == existingBeer.ID)
-                    .Count();
+                SetAverageRating(existingBeer);
 
                 context.Beers.Update(existingBeer);
                 context.SaveChanges();
@@ -179,5 +162,22 @@ namespace HopHub.Controllers
             }
             return View(editEntryVM);
         }
+
+        #region Helpers
+
+        private void SetAverageRating(Beer beer)
+        {
+            int sumOfEntries = context.Entries
+                    .Where(e => e.BeerID == beer.ID)
+                    .Sum(e => e.Rating);
+
+            int numberOfEntries = context.Entries
+                    .Where(e => e.BeerID == beer.ID)
+                    .Count();
+
+            beer.AvgRating = (double)sumOfEntries / numberOfEntries;
+        }
+
+        #endregion
     }
 }

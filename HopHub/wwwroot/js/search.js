@@ -23,8 +23,9 @@ function getBeers(query, pageNum) {
 
             // Display number of results and page number
             if (notEmpty(beers)) {
-                $('.results').append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`);
-                $('.results').append("<br>");
+                $('.results')
+                    .append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`)
+                    .append("<br>");
             } else {
                 $('.results').append("<i>No search results.</i>");
             }
@@ -33,11 +34,11 @@ function getBeers(query, pageNum) {
             for (let i = 0; i < resultsOnPage; i++) {
 
                 let name = beers[i].name;
-                let style = (beers[i].style);
+                let style = beers[i].style;
                 let abv = beers[i].abv;
                 let description = beers[i].description;
                 let beerId = beers[i].id;
-                let brewery = beers[i].breweries[0];
+                let brewery = beers[i].breweries;
                 let image = beers[i].labels;
 
                 
@@ -59,10 +60,14 @@ function getBeers(query, pageNum) {
 
                 // Use placeholder image if label not available
                 if (notEmpty(image)) {
-                    $('.results').append(`<div class="pull-right"><img src="${image.icon}"></div>`);
+                    $('.results').append(`<img src="${image.icon}">`);
                 } else {
-                    $('.results').append(`<div class="pull-right"><img class="thumbnail" src="/images/noun_3235_cc-gry2-lg.svg" height="64px"></div>`);
+                    $('.results').append(`<img src="/images/default_logo_gray.svg">`);
                 }
+
+                $('img')
+                    .addClass('pull-right')
+                    .height(64);
 
                 // Link to individual beer page
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
@@ -71,7 +76,7 @@ function getBeers(query, pageNum) {
                     $('.results').append(`<b>${style.name}</b><br>`);
                 }
                 if (notEmpty(brewery)) {
-                    $('.results').append(`<b>${brewery.name}</b><br>`);
+                    $('.results').append(`<b>${brewery[0].name}</b><br>`);
                 }
                 if (notEmpty(abv)) {
                     $('.results').append(`<b>ABV: ${abv}%</b><br>`);
@@ -80,8 +85,9 @@ function getBeers(query, pageNum) {
                 $('.results').append("<br>");
 
                 if (notEmpty(description)) {
-                    $('.results').append(`${description}<br>`);
-                    $('.results').append("<br>");
+                    $('.results')
+                        .append(description)
+                        .append("<br><br>");
                 }
                 if (notEmpty(style)) {
                     $('.results').append(`Style Description: ${style.description}<br>`);

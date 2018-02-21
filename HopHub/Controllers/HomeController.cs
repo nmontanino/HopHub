@@ -38,16 +38,14 @@ namespace HopHub.Controllers
         public IActionResult Index()
         {
             // Get list of beer ordered by highest average rating
-            IList<Beer> topRated = context
-                .Beers
+            IList<Beer> topRated = context.Beers
                 .OrderByDescending(b => b.AvgRating)
                 .Take(5)
                 .Include(b => b.Entries)
                 .ToList();
 
             // Get list of entries sorted by time
-            IList<Entry> recentReviews = context
-                .Entries
+            IList<Entry> recentReviews = context.Entries
                 .Where(e => e.Review != null)
                 .OrderByDescending(e => e.TimeStamp)
                 .Include(e => e.Beer)

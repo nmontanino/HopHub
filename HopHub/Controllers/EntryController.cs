@@ -123,17 +123,23 @@ namespace HopHub.Controllers
         // GET: /Entry/Edit/
         public IActionResult Edit(int entryID)
         {
-            // TODO: Must check if the user has access (is the creator) of the object to be edited
-            
-            // Retrieve entry from database by ID
+            //Retrieve entry from database by ID
             Entry entryEdit = context
                 .Entries
                 .Include(e => e.Beer)
                 .Single(e => e.ID == entryID);
 
-            EditEntryViewModel model = EditEntryViewModel.EditEntry(entryEdit);
+            string userIdOfEntry = entryEdit.ApplicationUserID;
+            string currentUserId = _userManager.GetUserId(HttpContext.User);
 
-            return View(model);
+            // Check if the user has access (is the creator) of the object to be edited
+            if (User.Identity.IsAuthenticated && userIdOfEntry == currentUserId)
+            {
+                EditEntryViewModel editEntryVM = EditEntryViewModel.EditEntry(entryEdit);
+
+                return View(editEntryVM);
+            }
+            return Redirect("/Entry");
         }
         
         // POST: /Entry/Edit/

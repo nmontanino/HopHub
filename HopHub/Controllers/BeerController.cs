@@ -47,8 +47,7 @@ namespace HopHub.Controllers
 
                 // Get list of entries of that specific beer that includes a review
                 IList<Entry> entries = context.Entries
-                    .Where(e => e.Beer.ReferenceID == id)
-                    .Where(e => e.Review != null)
+                    .Where(e => e.Beer.ReferenceID == id && e.Review != null)
                     .Include(e => e.ApplicationUser)
                     .ToList();
 

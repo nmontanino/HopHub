@@ -9,7 +9,6 @@ namespace HopHub.Models
     {
         public int ID { get; set; }
 
-        // NOTE: ID for ApplicationUser uses string for primary key
         public string ApplicationUserID { get; set; } 
         public ApplicationUser ApplicationUser { get; set; }
 
@@ -20,7 +19,9 @@ namespace HopHub.Models
         public string Review { get; set; }
         public string UserComments { get; set; }
         public string Location { get; set; }
-
         public DateTime TimeStamp { get; set; }
+
+        // TODO: Implement soft delete
+        // public bool IsDeleted { get; set; }
     }
 }

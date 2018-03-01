@@ -92,6 +92,24 @@ $(document).ready(function () {
     if ($(".info").length) {
         singleBeer($.urlParam("id"));
     }
+
     $(".logo-box").hide().fadeIn(1600);
+
+    // Modal pop up to confirm deletion of entry when icon is clicked
+    $('#deleteConfirmation').on('click', '#deleteEntry', function (e) {
+        let $modalDiv = $(e.delegateTarget);
+        let id = $(this).data('recordId');
+        console.log(id);
+        $.post('/Entry/Remove?id=' + id).then(function () {
+            $modalDiv.modal('hide');
+            window.location.reload();
+        });
+    });
+
+    $('#deleteConfirmation').on('show.bs.modal', function (e) {
+        let data = $(e.relatedTarget).data();
+        $('.title', this).text(data.recordTitle);
+        $('#deleteEntry', this).data('recordId', data.recordId);
+    });
 });
 

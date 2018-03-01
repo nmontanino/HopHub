@@ -2,6 +2,24 @@
 @{
     ViewData["Title"] = "Log Entries";
 }
+<!-- Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="confirmDelete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirmDelete">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <b class="title"></b> from your log?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="deleteEntry">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Row -->
 <div class="row">
     <!-- Coulmn One-->
@@ -18,47 +36,6 @@
             }
             else
             {
-                @*<div class="list-group">
-                    @foreach (var entry in Model.Reverse())
-                    {
-                        <a href="/Beer?id=@entry.Beer.ReferenceID" class="list-group-item">
-                            <!-- Rating -->
-                            <div class="pull-right">
-                                <div class="rating">
-                                    @for (int x = 5; x >= 1; x--)
-                                    {
-                                        if (x <= entry.Rating)
-                                        {
-                                            <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
-                                            <label class="checked" for="@entry.ID+@x"></label>
-                                        }
-                                        else
-                                        {
-                                            <input type="radio" id="@entry.ID+@x" name="rating" value="@entry.ID+@x" />
-                                            <label for="@entry.ID+@x"></label>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                            <!-- Rating -->
-                            <h4 class="list-group-item-heading">@entry.Beer.Name</h4>
-                            <h5><b>Rating: @entry.Rating out of 5 (Average Rating: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></h5>
-                            @if (entry.Review != null)
-                            {
-                                <h5 class="list-group-item-heading">Review: @entry.Review</h5>
-                            }
-                            @if (entry.UserComments != null)
-                            {
-                                <h5 class="list-group-item-heading">Comments: @entry.UserComments</h5>
-                            }
-                            @if (entry.Location != null)
-                            {
-                                <h5 class="list-group-item-heading">Location: @entry.Location</h5>
-                            }
-                            <h6 class="list-group-item-text">Added on: @entry.TimeStamp</h6>
-                        </a>
-                    }
-                </div>*@
                 <div class="panel-body">
                     @foreach (var entry in Model.Reverse())
                     {
@@ -80,7 +57,7 @@
                                 }
                             </div>
                         </div>
-                        <!-- Rating -->
+                        <!-- End Rating -->
                         <h4><a href="/Beer?id=@entry.Beer.ReferenceID">@entry.Beer.Name</a></h4>
                         <p><b>Rating: @entry.Rating out of 5 (Average Rating: @String.Format("{0:0.#}", entry.Beer.AvgRating) out of 5)</b></p>
                         @if (entry.Review != null)
@@ -95,7 +72,8 @@
                         {
                             <p>Location: @entry.Location</p>
                         }
-                        <h4><a asp-controller="Entry" asp-action="Edit" asp-route-entryID="@entry.ID" title="Edit Entry" class="pull-right"><span class="glyphicon glyphicon-edit"></span></a></h4>
+                        <h4><a asp-controller="Entry" asp-action="Edit" asp-route-entryID="@entry.ID" title="Edit Entry" class="pull-right"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="#" data-record-id="@entry.ID" data-toggle="modal" data-target="#deleteConfirmation" data-record-title="@entry.Beer.Name" title="Delete Entry" class="pull-right"><span class="glyphicon glyphicon-trash"></span></a></h4>
                         <small>Added on: @entry.TimeStamp</small>
                         <hr />
                     }

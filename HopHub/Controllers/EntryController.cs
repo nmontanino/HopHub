@@ -149,7 +149,6 @@ namespace HopHub.Controllers
 
                 // Update average rating for the beer
                 Beer existingBeer = GetBeerById(editEntryVM.BeerID);
-
                 SetAverageRating(existingBeer);
 
                 context.Beers.Update(existingBeer);
@@ -160,36 +159,36 @@ namespace HopHub.Controllers
             return View(editEntryVM);
         }
 
-        // TODO: Implement remove controllers for soft delete
-        
-        /*
-        public IActionResult Remove(int entryID)
-        {
-            Entry entryToRemove = GetEntryById(entryID);
-
-            return View(entryToRemove);
-        }
-
+        // POST: /Entry/Remove/
         [HttpPost]
-        public IActionResult Remove(Entry entryToRemove)
+        public IActionResult Remove(string id)
         {
-            // Soft delete entry from database
-            entryToRemove.IsDeleted = true;
-            context.Entries.Update(entryToRemove);
-            context.SaveChanges();
+            int userId = int.Parse(id);
+            Entry entryToRemove = GetEntryById(userId);
 
-            // Update the beer's average rating after deletion
             Beer existingBeer = context.Beers
-                .Single(b => b.ID == entryToRemove.BeerID);
+                .Single(b => b.ID == entryToRemove.Beer.ID);
 
-            SetAverageRating(existingBeer);
+            int beerEntries = context.Entries
+                .Where(e => e.BeerID == existingBeer.ID)
+                .Count();
 
-            context.Beers.Update(existingBeer);
+            context.Entries.Remove(entryToRemove);
             context.SaveChanges();
+
+            if (beerEntries == 1)
+            {
+                existingBeer.AvgRating = null;
+            }
+            else
+            {
+                SetAverageRating(existingBeer);
+                context.Beers.Update(existingBeer);
+                context.SaveChanges();
+            }
 
             return Redirect("/Entry");
         }
-        */
 
         #region Helpers
 

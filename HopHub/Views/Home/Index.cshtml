@@ -12,6 +12,17 @@
         margin: 0;
         padding-bottom: 0;
     }
+    .btn-default {
+        background-color: #FABE28;
+    }
+        .btn-default:hover {
+            background-color: #E1AB24;
+        }
+        .btn-default:active,
+        .btn-default:focus,
+        .btn-default:active:focus {
+            background-color: #C89820;
+        }
 </style>
 }
 @{ 
@@ -32,7 +43,7 @@
                         <div class="input-group">
                             <input type="search" class="form-control" name="beer" placeholder="Search beer or brewery...">
                             <span class="input-group-btn">
-                                <button class="btn btn-success" type="submit">
+                                <button class="btn btn-default" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
@@ -63,7 +74,7 @@
                                 @*<span class="badge">@String.Format("{0:0.#}", beer.AvgRating) ★</span>*@
                                 <h4 class="list-group-item-heading"><b>@beer.Name</b></h4>
                                 <p class="list-group-item-text">@String.Format("{0:0.#}", beer.AvgRating) out of 5</p>
-                                <p class="list-group-item-text">@beer.Entries.Count() Log Entries</p>
+                                <p class="list-group-item-text">@beer.Entries.Count() Entries</p>
                             </a>
                         }
                 </div>

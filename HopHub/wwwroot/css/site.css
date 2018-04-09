@@ -64,14 +64,14 @@
         }
 
 .checked {
-    color: #93c54b !important;
-    /*color: #FABE28 !important;*/
+    /*color: #93c54b !important;*/
+    color: #FABE28 !important;
 }
 
 body {
     height: 100%;
     margin: 0;
-    background-color: #f8f5f0;
+    /*background-color: #f8f5f0;*/
 }
 
 /* Background image */

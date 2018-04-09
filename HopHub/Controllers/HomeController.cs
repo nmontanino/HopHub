@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using unirest_net.http;
 
 namespace HopHub.Controllers
@@ -22,7 +23,18 @@ namespace HopHub.Controllers
             context = dbContext;
             configuration = config;
         }
+        public async Task<object> SearchBeers(string beer, string pageNum = "1")
+        {
+            string type = "beer";
+            string key = configuration["APIKey"];
+            string uri = $"https://api.brewerydb.com/v2/search?p={pageNum}&q={beer}&type={type}&withBreweries=Y&key={key}";
 
+            HttpResponse<string> beerResults = await Unirest.get(uri).asJsonAsync<string>();
+
+            var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
+            return results;
+        }
+        /*
         public object GetBeer(string beer, string pageNum = "1")
         {
             string type = "beer";
@@ -32,6 +44,28 @@ namespace HopHub.Controllers
             HttpResponse<string> beerResults = Unirest.get(uri).asJson<string>();
 
             var results = JsonConvert.DeserializeObject<object>(beerResults.Body);
+            return results;
+        }
+
+        public object GetFeatured()
+        {
+            string key = configuration["APIKey"];
+            string uri = $"https://api.brewerydb.com/v2/featured?key={key}";
+
+            HttpResponse<string> featuredBeers = Unirest.get(uri).asJson<string>();
+
+            var results = JsonConvert.DeserializeObject<object>(featuredBeers.Body);
+            return results;
+        }
+        */
+        public object GetBrewery(string id)
+        {
+            string key = configuration["APIKey"];
+            string uri = $"https://api.brewerydb.com/v2/brewery/{id}?key={key}";
+
+            HttpResponse<string> brewery = Unirest.get(uri).asJson<string>();
+
+            var results = JsonConvert.DeserializeObject<object>(brewery.Body);
             return results;
         }
 
@@ -60,6 +94,11 @@ namespace HopHub.Controllers
         public IActionResult Search()
         {
             // Display search results
+            return View();
+        }
+
+        public IActionResult Brewery()
+        {
             return View();
         }
 

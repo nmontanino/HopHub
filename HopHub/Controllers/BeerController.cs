@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using unirest_net.http;
 
 namespace HopHub.Controllers
@@ -22,7 +23,7 @@ namespace HopHub.Controllers
         }
 
         // Get beer by ID
-        public object SingleBeer(string id)
+        public object GetBeer(string id)
         {
             string key = configuration["APIKey"];
             string uri = $"https://api.brewerydb.com/v2/beer/{id}?withBreweries=Y&key={key}";

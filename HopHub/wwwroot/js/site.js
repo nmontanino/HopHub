@@ -15,9 +15,9 @@ $.urlParam = function (name) {
     }
 };
 
-function singleBeer(beerId) {
+function getBeer(beerId) {
     $.ajax({
-        url: "/beer/singlebeer?id=" + beerId,
+        url: "/beer/getbeer?id=" + beerId,
         success: function (response) {
             console.log(response);
 
@@ -32,7 +32,7 @@ function singleBeer(beerId) {
             let breweryName = brewery.name;
             let website = brewery.website;
 
-            if (notEmpty(image)) {
+            if (image) {
                 $(".media-right").html(
                     `<a href="${image.large}"><img src="${image.medium}"></a>`
                 );
@@ -45,34 +45,34 @@ function singleBeer(beerId) {
 
             $(".media-body").append(`<h4>${beer.name}</h4>`);
 
-            if (notEmpty(style)) {
+            if (style) {
                 $(".media-body").append(`<h4>${style.name}</h4>`);
             }
-            if (notEmpty(breweryName)) {
+            if (breweryName) {
                 $(".media-body").append(`<h4>${breweryName}</h4>`);
             }
-            if (notEmpty(abv)) {
+            if (abv) {
                 $(".media-body").append(`<h4>ABV: ${abv}%</h4>`);
             }
 
             $(".info").append(`<br>`);
 
-            if (notEmpty(description)) {
+            if (description) {
                 $(".info")
                     .append(`<p><b>Beer Description</b></p>`)
                     .append(`<p>${description}</p><br>`);
             }
-            if (notEmpty(style)) {
+            if (style) {
                 $(".info")
                     .append(`<p><b>Style Description</b></p>`)
                     .append(`<p>${style.description}</p><br>`);
             }
-            if (notEmpty(breweryDesc)) {
+            if (breweryDesc) {
                 $(".info")
                     .append(`<p><b>Brewery Description</b></p>`)
                     .append(`<p>${breweryDesc}</p>`);
             }
-            if (notEmpty(website)) {
+            if (website) {
                 $(".info").append(`<p><a href="${website}">Brewery Website</a></p>`);
                 $(".info a").attr("target", "_blank");
             }
@@ -88,12 +88,31 @@ function singleBeer(beerId) {
     });
 }
 
-$(document).ready(function () {
-    if ($(".info").length) {
-        singleBeer($.urlParam("id"));
-    }
+/*
+function getBrewery(breweryId) {
+    $.ajax({
+        url: "/home/getbrewery?id" + breweryId,
+        success: function (response) {
+            console.log(response);
+        }
+    });
+}
+function getFeatured() {
+    $.ajax({
+        url: "/home/getfeatured/",
+        success: function (response) {
+            console.log(response);
+        }
+    });
+}
+*/
 
-    $(".logo-box").hide().fadeIn(1600);
+$(document).ready(function () {
+    //$(".logo-box").hide().fadeIn(1600);
+
+    if ($(".info").length) {
+        getBeer($.urlParam("id"));
+    }
 
     // Modal pop up to confirm deletion of entry when icon is clicked
     $('#deleteConfirmation').on('click', '#deleteEntry', function (e) {

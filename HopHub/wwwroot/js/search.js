@@ -1,8 +1,8 @@
 ﻿'use strict';
 
-function getBeers(query, pageNum) {
+function searchBeers(query, pageNum) {
     $.ajax({
-        url: "/home/getbeer?beer=" + query + "&pageNum=" + pageNum,
+        url: "/home/searchbeers?beer=" + query + "&pageNum=" + pageNum,
         success: function (response) {
             console.log(response);
 
@@ -22,7 +22,7 @@ function getBeers(query, pageNum) {
             }
 
             // Display number of results and page number
-            if (notEmpty(beers)) {
+            if (beers) {
                 $('.results')
                     .append(`<p><i>Displaying ${beers.length} out of ${numResults} results. (Page ${currentPage} of ${pages})</i></p>`)
                     .append("<br>");
@@ -41,7 +41,7 @@ function getBeers(query, pageNum) {
                 let brewery = beers[i].breweries;
                 let image = beers[i].labels;
 
-                
+
                 //Checking for undefined values using ternary operators inside template strings. 
                 /*
                 let markup = `
@@ -59,7 +59,7 @@ function getBeers(query, pageNum) {
                 */
 
                 // Use placeholder image if label not available
-                if (notEmpty(image)) {
+                if (image) {
                     $('.results').append(`<img src="${image.icon}">`);
                 } else {
                     $('.results').append(`<img src="/images/default_logo_gray.svg">`);
@@ -72,32 +72,37 @@ function getBeers(query, pageNum) {
                 // Link to individual beer page
                 $('.results').append(`<b><a href="/Beer?id=${beerId}">${name}</a></b><br>`);
 
-                if (notEmpty(style)) {
+                if (style) {
                     $('.results').append(`<b>${style.name}</b><br>`);
                 }
-                if (notEmpty(brewery)) {
-                    $('.results').append(`<b>${brewery[0].name}</b><br>`);
-                }
-                if (notEmpty(abv)) {
+                if (abv) {
                     $('.results').append(`<b>ABV: ${abv}%</b><br>`);
+                }
+                if (brewery) {
+                    //$('.results').append(`<b><a href="/Home/Brewery?id=${brewery[0].id}">${brewery[0].name}</a></b><br>`);
+                    $('.results').append(`<b>${brewery[0].name}</b><br>`)
                 }
 
                 $('.results').append("<br>");
 
-                if (notEmpty(description)) {
+                if (description) {
                     $('.results')
                         .append(description)
-                        .append("<br><br>");
+                        .append("<br>");
                 }
-                if (notEmpty(style)) {
-                    $('.results').append(`Style Description: ${style.description}<br>`);
-                }
+                //if (notEmpty(style)) {
+                //    $('.results').append(`Style Description: ${style.description}<br>`);
+                //}
 
                 $('.results').append("<hr>");
             }
         }
+        
     });
 }
+
 $(document).ready(function () {
-    getBeers($.urlParam('beer'), $.urlParam('pageNum'));
+    searchBeers($.urlParam('beer'), $.urlParam('pageNum'));
 });
+
+
